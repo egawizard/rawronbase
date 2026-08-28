@@ -1,1 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f4f1e9" />
+  <title>RAWR NFT — Preclaim Whitelist</title>
+  <meta name="description" content="RAWR NFT preclaim whitelist. Submit your wallet before the next phase begins." />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="assets/favicon-180.png" />
+  <style>
+    :root{
+      --paper:#f4f1e9;
+      --ink:#161616;
+      --muted:#67645e;
+      --line:#161616;
+      --acid:#d8ff3e;
+      --white:#fffdf7;
+      --shadow:8px 8px 0 #161616;
+    }
 
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--ink);
+      background:
+        linear-gradient(rgba(22,22,22,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22,22,22,.045) 1px, transparent 1px),
+        var(--paper);
+      background-size:28px 28px;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    a{color:inherit}
+    button,input{font:inherit}
+    .wrap{width:min(1120px, calc(100% - 32px)); margin:0 auto}
+
+    .topbar{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      border-bottom:2px solid var(--line);
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:-.04em;font-size:22px}
+    .brand img{width:38px;height:38px;image-rendering:pixelated;border:2px solid var(--line);background:#fff}
+    .nav-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+
+    .chip,.x-link,.lang button{
+      border:2px solid var(--line);
+      background:var(--white);
+      min-height:40px;
+      padding:0 14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:850;
+      text-decoration:none;
+      color:var(--ink);
+    }
+    .x-link:hover,.lang button:hover{background:var(--acid)}
+    .lang{display:flex}
+    .lang button{cursor:pointer;margin-left:-2px}
+    .lang button:first-child{margin-left:0}
+    .lang button.active{background:var(--ink);color:#fff}
+
+    main{padding:54px 0 72px}
+    .grid{display:grid;grid-template-columns:1.04fr .96fr;gap:42px;align-items:center}
+
+    .hero{position:relative}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:9px;
+      border:2px solid var(--line);background:var(--acid);
+      padding:8px 11px;font:800 12px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      letter-spacing:.08em;text-transform:uppercase;
+      box-shadow:4px 4px 0 var(--line);
+    }
+    h1{
+      margin:24px 0 14px;
+      font-size:clamp(62px, 10vw, 128px);
+      line-height:.78;
+      letter-spacing:-.085em;
+      font-weight:1000;
+    }
+    .sub{
+      margin:0;
+      max-width:650px;
+      font-size:clamp(18px,2vw,25px);
+      line-height:1.38;
+      font-weight:700;
+    }
+    .muted{color:var(--muted);font-weight:600}
+
+    .signal-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+    .signal{
+      border:2px solid var(--line);
+      background:var(--white);
+      padding:10px 12px;
+      font:800 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      text-transform:uppercase;
+    }
+
+    .mascot-wrap{margin-top:34px;display:flex;align-items:flex-end;gap:16px}
+    .mascot{
+      width:min(260px,46vw);aspect-ratio:1;
+      background:#fff;border:2px solid var(--line);box-shadow:var(--shadow);
+      display:grid;place-items:center;overflow:hidden
+    }
+    .mascot img{width:100%;height:100%;object-fit:cover;image-rendering:pixelated;filter:contrast(1.05)}
+    .speech{
+      border:2px solid var(--line);background:var(--acid);padding:13px 15px;
+      font:900 13px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace;
+      max-width:220px;position:relative
+    }
+    .speech:before{content:"";position:absolute;left:-12px;bottom:20px;width:18px;height:18px;background:var(--acid);border-left:2px solid var(--line);border-bottom:2px solid var(--line);transform:rotate(45deg)}
+
+    .card{
+      background:var(--white);
+      border:2px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:28px;
+      position:relative;
+    }
+    .card:before{
+      content:"WHITELIST TERMINAL";
+      position:absolute;top:-16px;right:18px;
+      background:var(--ink);color:white;border:2px solid var(--line);
+      padding:6px 9px;
+      font:800 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      letter-spacing:.12em;
+    }
+    .card h2{font-size:32px;letter-spacing:-.04em;margin:4px 0 8px}
+    .card p{margin:0 0 22px;color:var(--muted);line-height:1.5;font-weight:600}
+
+    .step{
+      display:flex;gap:12px;align-items:center;border-top:1px dashed #aaa59b;padding:14px 0;
+      font-weight:780;font-size:14px
+    }
+    .step:first-of-type{margin-top:8px}
+    .num{width:28px;height:28px;border:2px solid var(--line);display:grid;place-items:center;font:900 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--acid);flex:0 0 auto}
+    .step a{text-decoration-thickness:2px;text-underline-offset:3px}
+
+    form{margin-top:18px}
+    label{display:block;margin:15px 0 7px;font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+    input[type="text"]{
+      width:100%;height:52px;border:2px solid var(--line);background:#fff;padding:0 13px;outline:none;font-weight:700;border-radius:0
+    }
+    input[type="text"]:focus{box-shadow:4px 4px 0 var(--acid)}
+    .check{display:flex;gap:10px;align-items:flex-start;margin:16px 0 18px;font-size:13px;font-weight:700;line-height:1.35}
+    .check input{width:19px;height:19px;accent-color:#161616;margin-top:0;flex:0 0 auto}
+    .honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+
+    .submit{
+      width:100%;min-height:56px;border:2px solid var(--line);background:var(--acid);color:var(--ink);
+      font-weight:1000;letter-spacing:.025em;cursor:pointer;box-shadow:5px 5px 0 var(--line);
+      transition:transform .12s ease, box-shadow .12s ease
+    }
+    .submit:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--line)}
+    .submit:disabled{cursor:not-allowed;opacity:.6;transform:none;box-shadow:none}
+
+    .status{min-height:22px;margin-top:14px;font-size:13px;font-weight:850}
+    .status.ok{color:#147a26}.status.err{color:#b42318}
+    .fine{font-size:11.5px!important;margin:12px 0 0!important;color:#77736b!important}
+
+    footer{border-top:2px solid var(--line);padding:24px 0 36px;font-size:12px;font-weight:700;color:var(--muted)}
+    .footer-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+    @media (max-width:860px){
+      .grid{grid-template-columns:1fr;gap:54px}
+      .hero{text-align:center}.sub{margin-inline:auto}.signal-row,.mascot-wrap{justify-content:center}
+      .topbar{padding:12px 0;align-items:flex-start}.brand{padding-top:3px}
+      .nav-actions{max-width:70%}
+    }
+    @media (max-width:560px){
+      .wrap{width:min(100% - 20px,1120px)}
+      main{padding-top:34px}
+      .topbar{display:block}.nav-actions{max-width:none;margin-top:10px;justify-content:flex-start}
+      .x-link{flex:1}.card{padding:22px 18px}.mascot-wrap{align-items:center;flex-direction:column}.speech{max-width:260px}.speech:before{display:none}
+      h1{font-size:74px}
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <div class="brand"><img src="assets/rawr-logo.png" alt="RAWR NFT logo" /> RAWR NFT</div>
+    <div class="nav-actions">
+      <a class="x-link" href="https://x.com/rawrNft_base" target="_blank" rel="noopener">X / @rawrNft_base ↗</a>
+      <div class="lang" aria-label="Language">
+        <button type="button" id="lang-en" class="active">EN</button>
+        <button type="button" id="lang-zh">中文</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="grid">
+      <section class="hero">
+        <div class="eyebrow" data-i18n="eyebrow">PRECLAIM · WHITELIST OPEN</div>
+        <h1>RAWR!</h1>
+        <p class="sub" data-i18n="hero">A tiny pixel beast is waking up. Get your wallet on the RAWR NFT whitelist before the next phase begins.</p>
+        <div class="signal-row">
+          <div class="signal" data-i18n="badge_free">FREE PRECLAIM</div>
+          <div class="signal" data-i18n="badge_wallet">NO WALLET CONNECT</div>
+          <div class="signal" data-i18n="badge_one">ONE ENTRY / WALLET</div>
+        </div>
+        <div class="mascot-wrap">
+          <div class="mascot"><img src="assets/rawr-logo.png" alt="RAWR pixel mascot" /></div>
+          <div class="speech" data-i18n="speech">DON'T OVERTHINK IT. JUST RAWR.</div>
+        </div>
+      </section>
+
+      <section class="card" id="preclaim">
+        <h2 data-i18n="card_title">Join the whitelist.</h2>
+        <p data-i18n="card_sub">Follow RAWR NFT on X, add your wallet, and lock in your preclaim entry.</p>
+
+        <div class="step"><span class="num">01</span><span><span data-i18n="step_follow">Follow</span> <a href="https://x.com/rawrNft_base" target="_blank" rel="noopener">@rawrNft_base</a></span></div>
+        <div class="step"><span class="num">02</span><span data-i18n="step_wallet">Enter the wallet you plan to use.</span></div>
+        <div class="step"><span class="num">03</span><span data-i18n="step_submit">Submit once. You're done.</span></div>
+
+        <form id="claim-form" novalidate>
+          <label for="wallet" data-i18n="wallet_label">Wallet address</label>
+          <input id="wallet" name="wallet" type="text" inputmode="text" autocomplete="off" placeholder="0x..." maxlength="42" />
+
+          <label for="handle" data-i18n="handle_label">X handle (optional)</label>
+          <input id="handle" name="twitter_handle" type="text" autocomplete="off" placeholder="@yourhandle" maxlength="64" />
+
+          <label class="check" for="follow-confirm">
+            <input id="follow-confirm" type="checkbox" />
+            <span data-i18n="follow_confirm">I've followed @rawrNft_base and want to join the RAWR NFT whitelist.</span>
+          </label>
+
+          <div class="honeypot" aria-hidden="true"><label>Website<input id="botcheck" name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
+
+          <button class="submit" id="submit-btn" type="submit" data-i18n="submit">PRECLAIM WHITELIST</button>
+          <div class="status" id="status" role="status" aria-live="polite"></div>
+          <p class="fine" data-i18n="fine">Never share your seed phrase or private key. This form only asks for a public wallet address.</p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span>© 2026 RAWR NFT</span>
+      <a href="https://x.com/rawrNft_base" target="_blank" rel="noopener">x.com/rawrNft_base ↗</a>
+    </div>
+  </footer>
+
+  <script>
+    const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwZxRs-sWGMvYaCMWajlosIoLwdaJB91RQPfMoUpQaLbJ7nbBTk6V57QlBMFICD4_Af/exec";
+
+    const I18N = {
+      en: {
+        eyebrow: "PRECLAIM · WHITELIST OPEN",
+        hero: "A tiny pixel beast is waking up. Get your wallet on the RAWR NFT whitelist before the next phase begins.",
+        badge_free: "FREE PRECLAIM", badge_wallet: "NO WALLET CONNECT", badge_one: "ONE ENTRY / WALLET",
+        speech: "DON'T OVERTHINK IT. JUST RAWR.",
+        card_title: "Join the whitelist.",
+        card_sub: "Follow RAWR NFT on X, add your wallet, and lock in your preclaim entry.",
+        step_follow: "Follow", step_wallet: "Enter the wallet you plan to use.", step_submit: "Submit once. You're done.",
+        wallet_label: "Wallet address", handle_label: "X handle (optional)",
+        follow_confirm: "I've followed @rawrNft_base and want to join the RAWR NFT whitelist.",
+        submit: "PRECLAIM WHITELIST", submitting: "SUBMITTING...",
+        fine: "Never share your seed phrase or private key. This form only asks for a public wallet address.",
+        err_wallet: "Enter a valid EVM wallet address (0x + 40 hex characters).",
+        err_follow: "Please follow @rawrNft_base and confirm the checkbox first.",
+        err_network: "Could not submit right now. Please try again.",
+        ok: "RAWR! Your whitelist preclaim has been submitted. 🦖"
+      },
+      zh: {
+        eyebrow: "预登记 · 白名单开放",
+        hero: "这只像素小兽正在苏醒。下一阶段开始前，把你的钱包加入 RAWR NFT 白名单。",
+        badge_free: "免费预登记", badge_wallet: "无需连接钱包", badge_one: "每个钱包一次",
+        speech: "别想太多。RAWR 就对了。",
+        card_title: "加入白名单。",
+        card_sub: "在 X 上关注 RAWR NFT，填写钱包地址，完成白名单预登记。",
+        step_follow: "关注", step_wallet: "填写你准备使用的钱包地址。", step_submit: "只需提交一次，即可完成。",
+        wallet_label: "钱包地址", handle_label: "X 用户名（可选）",
+        follow_confirm: "我已关注 @rawrNft_base，并希望加入 RAWR NFT 白名单。",
+        submit: "预登记白名单", submitting: "提交中...",
+        fine: "绝不要分享助记词或私钥。本表单只需要你的公开钱包地址。",
+        err_wallet: "请输入有效的 EVM 钱包地址（0x + 40 位十六进制字符）。",
+        err_follow: "请先关注 @rawrNft_base 并勾选确认。",
+        err_network: "暂时无法提交，请稍后重试。",
+        ok: "RAWR！你的白名单预登记已提交。🦖"
+      }
+    };
+
+    let currentLang = "en";
+    const t = (k) => I18N[currentLang][k] || k;
+
+    function applyLang(lang){
+      currentLang = lang;
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (I18N[lang][key] !== undefined) el.textContent = I18N[lang][key];
+      });
+      document.getElementById("lang-en").classList.toggle("active", lang === "en");
+      document.getElementById("lang-zh").classList.toggle("active", lang === "zh");
+      document.getElementById("status").textContent = "";
+      document.getElementById("status").className = "status";
+    }
+
+    document.getElementById("lang-en").addEventListener("click", () => applyLang("en"));
+    document.getElementById("lang-zh").addEventListener("click", () => applyLang("zh"));
+
+    function validAddress(v){ return /^0x[a-fA-F0-9]{40}$/.test(v.trim()); }
+
+    const form = document.getElementById("claim-form");
+    const btn = document.getElementById("submit-btn");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      status.textContent = "";
+      status.className = "status";
+
+      const wallet = document.getElementById("wallet").value.trim();
+      const handle = document.getElementById("handle").value.trim();
+      const followed = document.getElementById("follow-confirm").checked;
+      const bot = document.getElementById("botcheck").value.trim();
+
+      if (bot) return;
+      if (!validAddress(wallet)) {
+        status.textContent = t("err_wallet"); status.className = "status err"; return;
+      }
+      if (!followed) {
+        status.textContent = t("err_follow"); status.className = "status err"; return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = t("submitting");
+
+      const body = new URLSearchParams();
+      body.append("wallet_address", wallet);
+      body.append("twitter_handle", handle);
+      // Keep the existing field name for compatibility with the previous Google Sheet script.
+      body.append("retweet_confirmed", "yes");
+      body.append("source", "rawr-preclaim");
+
+      try {
+        await fetch(SHEET_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+          body
+        });
+        status.textContent = t("ok");
+        status.className = "status ok";
+        localStorage.setItem("rawr_preclaim_wallet", wallet.toLowerCase());
+        form.reset();
+      } catch (err) {
+        status.textContent = t("err_network");
+        status.className = "status err";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = t("submit");
+      }
+    });
+  </script>
+</body>
+</html>
