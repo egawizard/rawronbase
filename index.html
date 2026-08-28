@@ -73,6 +73,12 @@
       color:var(--ink);
     }
     .x-link:hover,.lang button:hover{background:var(--acid)}
+    .mint-link{
+      border:2px solid var(--line);background:var(--acid);color:var(--ink);min-height:40px;padding:0 14px;
+      display:inline-flex;align-items:center;justify-content:center;font-weight:1000;text-decoration:none;
+      box-shadow:3px 3px 0 var(--line);transition:transform .12s ease,box-shadow .12s ease
+    }
+    .mint-link:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--line)}
     .lang{display:flex}
     .lang button{cursor:pointer;margin-left:-2px}
     .lang button:first-child{margin-left:0}
@@ -139,6 +145,12 @@
       font:850 13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;max-width:610px;
     }
     .network-note strong{color:#0052ff}
+    .mint-hero{
+      margin-top:18px;min-height:58px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;
+      border:2px solid var(--line);background:#0052ff;color:#fff;text-decoration:none;font-weight:1000;
+      letter-spacing:.02em;box-shadow:5px 5px 0 var(--line);transition:transform .12s ease,box-shadow .12s ease
+    }
+    .mint-hero:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--line)}
 
     .card{
       background:var(--white);
@@ -217,6 +229,7 @@
     <div class="brand"><img src="https://files.catbox.moe/f8xafn.png" onerror="this.onerror=null;this.src='assets/rawr-logo.png'" alt="RAWR NFT logo" /> RAWR NFT</div>
     <div class="nav-actions">
       <div class="base-chip"><span class="base-dot"></span><span data-i18n="base_nav">BASE NETWORK</span></div>
+      <a class="mint-link" href="https://opensea.io/collection/rawr-on-base/overview" target="_blank" rel="noopener" data-i18n="mint_nav">MINT ON OPENSEA ↗</a>
       <a class="x-link" href="https://x.com/rawrNft_base" target="_blank" rel="noopener">X / @rawrNft_base ↗</a>
       <div class="lang" aria-label="Language">
         <button type="button" id="lang-en" class="active">EN</button>
@@ -246,6 +259,7 @@
           <div class="speech" data-i18n="speech">DON'T OVERTHINK IT. JUST RAWR.</div>
         </div>
         <div class="network-note" data-i18n="network_note"><strong>RAWR NFT</strong> lives on <strong>Base</strong> — an Ethereum Layer 2 network.</div>
+        <a class="mint-hero" href="https://opensea.io/collection/rawr-on-base/overview" target="_blank" rel="noopener" data-i18n="mint_hero">MINT RAWR NFT ON OPENSEA ↗</a>
       </section>
 
       <section class="card" id="preclaim">
@@ -288,7 +302,7 @@
   <footer>
     <div class="wrap footer-row">
       <span>© 2026 RAWR NFT</span>
-      <a href="https://x.com/rawrNft_base" target="_blank" rel="noopener">x.com/rawrNft_base ↗</a>
+      <span><a href="https://opensea.io/collection/rawr-on-base/overview" target="_blank" rel="noopener">Mint on OpenSea ↗</a> &nbsp;·&nbsp; <a href="https://x.com/rawrNft_base" target="_blank" rel="noopener">x.com/rawrNft_base ↗</a></span>
     </div>
   </footer>
 
@@ -299,6 +313,7 @@
       en: {
         eyebrow: "PRECLAIM · WHITELIST OPEN",
         base_nav: "BASE NETWORK",
+        mint_nav: "MINT ON OPENSEA ↗", mint_hero: "MINT RAWR NFT ON OPENSEA ↗",
         hero: "A tiny pixel beast is waking up on Base. 6,969 total supply. Free mint. Get your wallet on the RAWR NFT whitelist before the next phase begins.",
         fact_supply: "TOTAL NFT SUPPLY", fact_free_value: "FREE", fact_mint: "MINT PRICE",
         badge_free: "FREE MINT", badge_wallet: "NO WALLET CONNECT", badge_one: "ONE ENTRY / WALLET", badge_base: "BUILT ON BASE",
@@ -321,6 +336,7 @@
       zh: {
         eyebrow: "预登记 · 白名单开放",
         base_nav: "BASE 网络",
+        mint_nav: "前往 OPENSEA 铸造 ↗", mint_hero: "在 OPENSEA 铸造 RAWR NFT ↗",
         hero: "这只像素小兽正在 Base 上苏醒。总供应量 6,969 枚，免费铸造。下一阶段开始前，把你的钱包加入 RAWR NFT 白名单。",
         fact_supply: "NFT 总供应量", fact_free_value: "免费", fact_mint: "铸造价格",
         badge_free: "免费铸造", badge_wallet: "无需连接钱包", badge_one: "每个钱包一次", badge_base: "构建于 BASE",
