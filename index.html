@@ -206,6 +206,69 @@
     .status.ok{color:#147a26}.status.err{color:#b42318}
     .fine{font-size:11.5px!important;margin:12px 0 0!important;color:#77736b!important}
 
+
+    /* ---------- RAWR RUN whitelist gate ---------- */
+    .game-gate{
+      margin:18px 0 20px;
+      border:2px solid var(--line);
+      background:#fff;
+      box-shadow:5px 5px 0 var(--line);
+      overflow:hidden;
+    }
+    .game-head{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      padding:11px 12px;border-bottom:2px solid var(--line);background:var(--acid);
+    }
+    .game-title{
+      font:1000 14px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      letter-spacing:.08em;text-transform:uppercase;
+    }
+    .game-score{
+      border:2px solid var(--line);background:#fff;padding:6px 9px;
+      font:950 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      white-space:nowrap;
+    }
+    .game-stage{position:relative;background:#f8f8f4}
+    #rawr-game{
+      display:block;width:100%;height:auto;aspect-ratio:16/5;
+      image-rendering:pixelated;touch-action:manipulation;cursor:pointer;
+    }
+    .game-overlay{
+      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+      pointer-events:none;padding:14px;text-align:center;
+    }
+    .game-overlay-box{
+      background:rgba(255,253,247,.94);border:2px solid var(--line);
+      padding:10px 14px;font:950 12px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;
+      box-shadow:4px 4px 0 var(--line);
+    }
+    .game-controls{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      border-top:2px solid var(--line);padding:10px 12px;background:#fff;
+    }
+    .game-help{
+      color:var(--muted);font:800 10px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;
+    }
+    .game-btn{
+      border:2px solid var(--line);background:#161616;color:#fff;padding:9px 12px;
+      font:950 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      cursor:pointer;box-shadow:3px 3px 0 #0052ff;
+    }
+    .game-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #0052ff}
+    .gate-status{
+      margin:12px 0 4px;padding:10px 12px;border:2px dashed #aaa59b;background:#faf8f2;
+      font:900 11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;
+    }
+    .gate-status.unlocked{border-style:solid;background:#eaffe0;color:#146c24}
+    .claim-locked input[type="text"],
+    .claim-locked .check{opacity:.46}
+    input[type="text"]:disabled{cursor:not-allowed;background:#eceae4;color:#777}
+    @media (max-width:560px){
+      .game-controls{align-items:flex-start;flex-direction:column}
+      .game-btn{width:100%}
+      #rawr-game{aspect-ratio:16/6}
+    }
+
     footer{border-top:2px solid var(--line);padding:24px 0 36px;font-size:12px;font-weight:700;color:var(--muted)}
     .footer-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 
@@ -264,34 +327,54 @@
 
       <section class="card" id="preclaim">
         <h2 data-i18n="card_title">Join the whitelist.</h2>
-        <p data-i18n="card_sub">Follow RAWR NFT on X, retweet the official post, then add your wallet to lock in your preclaim entry.</p>
+        <p data-i18n="card_sub">Follow RAWR NFT on X, retweet the official post, then survive RAWR RUN and score 20 points to unlock wallet entry.</p>
 
         <div class="step"><span class="num">01</span><span><span data-i18n="step_follow">Follow</span> <a href="https://x.com/rawrNft_base" target="_blank" rel="noopener">@rawrNft_base</a></span></div>
         <div class="step"><span class="num">02</span><span data-i18n="step_retweet">Retweet the official whitelist post.</span></div>
         <a class="retweet-btn" href="https://x.com/rawrNft_base/status/2093226701966954554?s=20" target="_blank" rel="noopener" data-i18n="retweet_btn">OPEN POST &amp; RETWEET ↗</a>
-        <div class="step"><span class="num">03</span><span data-i18n="step_wallet">Enter the wallet you plan to use.</span></div>
-        <div class="step"><span class="num">04</span><span data-i18n="step_submit">Confirm your retweet and submit once.</span></div>
+        <div class="step"><span class="num">03</span><span data-i18n="step_game">Score 20 points in RAWR RUN to unlock the claim terminal.</span></div>
 
-        <form id="claim-form" novalidate>
+        <div class="game-gate" id="game-gate">
+          <div class="game-head">
+            <div class="game-title" data-i18n="game_title">RAWR RUN · WHITELIST GATE</div>
+            <div class="game-score" id="game-score">SCORE 0 / 20</div>
+          </div>
+          <div class="game-stage">
+            <canvas id="rawr-game" width="640" height="200" aria-label="RAWR RUN game"></canvas>
+            <div class="game-overlay" id="game-overlay">
+              <div class="game-overlay-box" id="game-overlay-text" data-i18n="game_ready">PRESS START · REACH 20 POINTS</div>
+            </div>
+          </div>
+          <div class="game-controls">
+            <div class="game-help" data-i18n="game_help">SPACE / ↑ / TAP = JUMP · PASS AN OBSTACLE = +1</div>
+            <button type="button" class="game-btn" id="game-start" data-i18n="game_start">START / RESTART</button>
+          </div>
+        </div>
+
+        <div class="step"><span class="num">04</span><span data-i18n="step_wallet">Reach 20, then enter your wallet and submit once.</span></div>
+
+        <div class="gate-status" id="gate-status" data-i18n="gate_locked">🔒 CLAIM LOCKED — SCORE 20 TO UNLOCK WALLET ENTRY.</div>
+
+        <form id="claim-form" class="claim-locked" novalidate>
           <label for="wallet" data-i18n="wallet_label">Wallet address</label>
-          <input id="wallet" name="wallet" type="text" inputmode="text" autocomplete="off" placeholder="0x..." maxlength="42" />
+          <input id="wallet" name="wallet" type="text" inputmode="text" autocomplete="off" placeholder="LOCKED — SCORE 20 FIRST" maxlength="42" disabled />
 
           <label for="handle" data-i18n="handle_label">X handle (optional)</label>
-          <input id="handle" name="twitter_handle" type="text" autocomplete="off" placeholder="@yourhandle" maxlength="64" />
+          <input id="handle" name="twitter_handle" type="text" autocomplete="off" placeholder="@yourhandle" maxlength="64" disabled />
 
           <label class="check" for="follow-confirm">
-            <input id="follow-confirm" type="checkbox" />
+            <input id="follow-confirm" type="checkbox" disabled />
             <span data-i18n="follow_confirm">I've followed @rawrNft_base.</span>
           </label>
 
           <label class="check" for="retweet-confirm">
-            <input id="retweet-confirm" type="checkbox" />
+            <input id="retweet-confirm" type="checkbox" disabled />
             <span data-i18n="retweet_confirm">I've retweeted the official RAWR NFT post. Retweet is required before whitelist preclaim.</span>
           </label>
 
           <div class="honeypot" aria-hidden="true"><label>Website<input id="botcheck" name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
 
-          <button class="submit" id="submit-btn" type="submit" data-i18n="submit">PRECLAIM WHITELIST</button>
+          <button class="submit" id="submit-btn" type="submit" data-i18n="submit" disabled>PRECLAIM WHITELIST</button>
           <div class="status" id="status" role="status" aria-live="polite"></div>
           <p class="fine" data-i18n="fine">Never share your seed phrase or private key. This form only asks for a public wallet address.</p>
         </form>
@@ -320,13 +403,16 @@
         speech: "DON'T OVERTHINK IT. JUST RAWR.",
         network_note: "RAWR NFT lives on Base — an Ethereum Layer 2 network. Total supply: 6,969 NFTs. Mint price: free.",
         card_title: "Join the whitelist.",
-        card_sub: "Follow RAWR NFT on X, retweet the official post, then add your wallet to lock in your preclaim entry.",
-        step_follow: "Follow", step_retweet: "Retweet the official whitelist post.", retweet_btn: "OPEN POST & RETWEET ↗", step_wallet: "Enter the wallet you plan to use.", step_submit: "Confirm your retweet and submit once.",
+        card_sub: "Follow RAWR NFT on X, retweet the official post, then survive RAWR RUN and score 20 points to unlock wallet entry.",
+        step_follow: "Follow", step_retweet: "Retweet the official whitelist post.", retweet_btn: "OPEN POST & RETWEET ↗", step_game: "Score 20 points in RAWR RUN to unlock the claim terminal.", step_wallet: "Reach 20, then enter your wallet and submit once.", step_submit: "Confirm your retweet and submit once.",
+        game_title: "RAWR RUN · WHITELIST GATE", game_ready: "PRESS START · REACH 20 POINTS", game_help: "SPACE / ↑ / TAP = JUMP · PASS AN OBSTACLE = +1", game_start: "START / RESTART",
+        gate_locked: "🔒 CLAIM LOCKED — SCORE 20 TO UNLOCK WALLET ENTRY.", gate_unlocked: "✅ 20/20! CLAIM UNLOCKED — YOU CAN ENTER YOUR WALLET NOW.", game_over: "BONK! SCORE RESET — TRY AGAIN", game_win: "RAWR! 20/20 — WHITELIST TERMINAL UNLOCKED",
         wallet_label: "Wallet address", handle_label: "X handle (optional)",
         follow_confirm: "I've followed @rawrNft_base.",
         retweet_confirm: "I've retweeted the official RAWR NFT post. Retweet is required before whitelist preclaim.",
         submit: "PRECLAIM WHITELIST", submitting: "SUBMITTING...",
         fine: "Never share your seed phrase or private key. This form only asks for a public wallet address.",
+        err_game: "Score 20 points in RAWR RUN before claiming.",
         err_wallet: "Enter a valid EVM wallet address (0x + 40 hex characters).",
         err_follow: "Please follow @rawrNft_base and confirm the checkbox first.",
         err_retweet: "Retweet is required. Open the official post, retweet it, then confirm the checkbox.",
@@ -343,13 +429,16 @@
         speech: "别想太多。RAWR 就对了。",
         network_note: "RAWR NFT 位于 Base 网络 — 以太坊 Layer 2 网络。总供应量：6,969 枚 NFT。铸造价格：免费。",
         card_title: "加入白名单。",
-        card_sub: "在 X 上关注 RAWR NFT，转发官方帖子，然后填写钱包地址完成白名单预登记。",
-        step_follow: "关注", step_retweet: "转发官方白名单帖子。", retweet_btn: "打开帖子并转发 ↗", step_wallet: "填写你准备使用的钱包地址。", step_submit: "确认已转发，然后提交一次即可。",
+        card_sub: "在 X 上关注 RAWR NFT，转发官方帖子，然后在 RAWR RUN 中获得 20 分，才能解锁钱包地址输入。",
+        step_follow: "关注", step_retweet: "转发官方白名单帖子。", retweet_btn: "打开帖子并转发 ↗", step_game: "在 RAWR RUN 中获得 20 分以解锁白名单终端。", step_wallet: "达到 20 分后，填写钱包地址并提交一次。", step_submit: "确认已转发，然后提交一次即可。",
+        game_title: "RAWR RUN · 白名单关卡", game_ready: "点击开始 · 达到 20 分", game_help: "空格 / ↑ / 点击 = 跳跃 · 越过障碍 +1", game_start: "开始 / 重新开始",
+        gate_locked: "🔒 白名单已锁定 — 达到 20 分后才能输入钱包地址。", gate_unlocked: "✅ 20/20！白名单已解锁 — 现在可以填写钱包地址。", game_over: "撞到了！分数归零 — 再试一次", game_win: "RAWR！20/20 — 白名单终端已解锁",
         wallet_label: "钱包地址", handle_label: "X 用户名（可选）",
         follow_confirm: "我已关注 @rawrNft_base。",
         retweet_confirm: "我已转发 RAWR NFT 官方帖子。完成白名单预登记前必须转发。",
         submit: "预登记白名单", submitting: "提交中...",
         fine: "绝不要分享助记词或私钥。本表单只需要你的公开钱包地址。",
+        err_game: "请先在 RAWR RUN 中获得 20 分。",
         err_wallet: "请输入有效的 EVM 钱包地址（0x + 40 位十六进制字符）。",
         err_follow: "请先关注 @rawrNft_base 并勾选确认。",
         err_retweet: "必须先转发。请打开官方帖子完成转发，然后勾选确认。",
@@ -372,12 +461,287 @@
       document.getElementById("lang-zh").classList.toggle("active", lang === "zh");
       document.getElementById("status").textContent = "";
       document.getElementById("status").className = "status";
+      updateGameUi();
     }
 
     document.getElementById("lang-en").addEventListener("click", () => applyLang("en"));
     document.getElementById("lang-zh").addEventListener("click", () => applyLang("zh"));
 
     function validAddress(v){ return /^0x[a-fA-F0-9]{40}$/.test(v.trim()); }
+
+    /* ---------- RAWR RUN ----------
+       Original lightweight endless-runner built for the RAWR whitelist gate.
+       No Chrome game sprites/assets are used.
+    */
+    const GAME_TARGET = 20;
+    const canvas = document.getElementById("rawr-game");
+    const ctx = canvas.getContext("2d");
+    const scoreEl = document.getElementById("game-score");
+    const overlay = document.getElementById("game-overlay");
+    const overlayText = document.getElementById("game-overlay-text");
+    const startBtn = document.getElementById("game-start");
+    const gateStatus = document.getElementById("gate-status");
+
+    let gameUnlocked = sessionStorage.getItem("rawr_game_20_unlocked") === "1";
+    let running = false;
+    let won = gameUnlocked;
+    let score = gameUnlocked ? GAME_TARGET : 0;
+    let lastTime = 0;
+    let spawnTimer = 0;
+    let nextSpawn = 1050;
+    let speed = 270;
+    let obstacles = [];
+    let dust = [];
+
+    const groundY = 158;
+    const dino = {x:72, y:groundY-40, w:42, h:40, vy:0, grounded:true};
+
+    function rand(a,b){ return a + Math.random()*(b-a); }
+
+    function resetDino(){
+      dino.y = groundY-dino.h;
+      dino.vy = 0;
+      dino.grounded = true;
+    }
+
+    function setClaimUnlocked(unlocked){
+      gameUnlocked = unlocked;
+      const form = document.getElementById("claim-form");
+      const ids = ["wallet","handle","follow-confirm","retweet-confirm","submit-btn"];
+      ids.forEach(id => document.getElementById(id).disabled = !unlocked);
+      form.classList.toggle("claim-locked", !unlocked);
+      document.getElementById("wallet").placeholder = unlocked ? "0x..." : "LOCKED — SCORE 20 FIRST";
+      gateStatus.classList.toggle("unlocked", unlocked);
+      if(unlocked){
+        sessionStorage.setItem("rawr_game_20_unlocked","1");
+      } else {
+        sessionStorage.removeItem("rawr_game_20_unlocked");
+      }
+      updateGameUi();
+    }
+
+    function updateGameUi(){
+      if(!scoreEl) return;
+      scoreEl.textContent = `SCORE ${Math.min(score,GAME_TARGET)} / ${GAME_TARGET}`;
+      gateStatus.textContent = gameUnlocked ? t("gate_unlocked") : t("gate_locked");
+      if(gameUnlocked) gateStatus.classList.add("unlocked");
+      else gateStatus.classList.remove("unlocked");
+
+      if(!running){
+        if(won || gameUnlocked) overlayText.textContent = t("game_win");
+        else if(score === 0) overlayText.textContent = t("game_ready");
+      }
+    }
+
+    function startGame(){
+      if(gameUnlocked){
+        overlay.style.display = "flex";
+        overlayText.textContent = t("game_win");
+        drawGame();
+        return;
+      }
+      score = 0;
+      won = false;
+      speed = 270;
+      spawnTimer = 0;
+      nextSpawn = 850;
+      obstacles = [];
+      dust = [];
+      resetDino();
+      running = true;
+      lastTime = performance.now();
+      overlay.style.display = "none";
+      updateGameUi();
+      requestAnimationFrame(loop);
+    }
+
+    function jump(){
+      if(!running){
+        if(!gameUnlocked) startGame();
+        return;
+      }
+      if(dino.grounded){
+        dino.vy = -535;
+        dino.grounded = false;
+      }
+    }
+
+    function spawnObstacle(){
+      const tall = Math.random() > .55;
+      obstacles.push({
+        x: canvas.width + 20,
+        y: tall ? groundY-42 : groundY-28,
+        w: tall ? 23 : 28,
+        h: tall ? 42 : 28,
+        passed:false,
+        type: Math.random() > .5 ? 1 : 0
+      });
+    }
+
+    function collision(a,b){
+      const padX = 7, padY = 5;
+      return a.x+padX < b.x+b.w &&
+             a.x+a.w-padX > b.x &&
+             a.y+padY < b.y+b.h &&
+             a.y+a.h-padY > b.y;
+    }
+
+    function gameOver(){
+      running = false;
+      score = 0;
+      speed = 270;
+      obstacles = [];
+      resetDino();
+      overlay.style.display = "flex";
+      overlayText.textContent = t("game_over");
+      updateGameUi();
+      drawGame();
+    }
+
+    function winGame(){
+      running = false;
+      won = true;
+      score = GAME_TARGET;
+      obstacles = [];
+      resetDino();
+      setClaimUnlocked(true);
+      overlay.style.display = "flex";
+      overlayText.textContent = t("game_win");
+      drawGame();
+    }
+
+    function pxRect(x,y,w,h,color){
+      ctx.fillStyle=color; ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));
+    }
+
+    function drawDino(){
+      const x=Math.round(dino.x), y=Math.round(dino.y);
+      // RAWR original green pixel beast
+      pxRect(x+8,y+4,26,24,"#5f8f45");
+      pxRect(x+23,y+8,17,17,"#6fa34f");
+      pxRect(x+29,y+11,5,5,"#111");
+      pxRect(x+30,y+11,2,2,"#fff");
+      pxRect(x+34,y+21,8,5,"#f5f2df");
+      pxRect(x+2,y+12,12,11,"#5f8f45");
+      pxRect(x+5,y+23,18,9,"#5f8f45");
+      pxRect(x+9,y+31,6,9,"#3d672e");
+      pxRect(x+22,y+31,6,9,"#3d672e");
+      pxRect(x+1,y+10,6,5,"#3d672e");
+      // hoodie-ish dark patch
+      pxRect(x+11,y+21,13,8,"#252525");
+      // teeth
+      pxRect(x+35,y+21,2,3,"#fff");
+      pxRect(x+39,y+21,2,3,"#fff");
+    }
+
+    function drawObstacle(o){
+      if(o.type===0){
+        pxRect(o.x,o.y,o.w,o.h,"#1d1d1d");
+        pxRect(o.x+5,o.y-7,7,9,"#1d1d1d");
+        pxRect(o.x+13,o.y+8,8,7,"#1d1d1d");
+      }else{
+        pxRect(o.x,o.y,o.w,o.h,"#5f8f45");
+        pxRect(o.x+6,o.y-7,7,12,"#5f8f45");
+        pxRect(o.x-5,o.y+12,8,7,"#5f8f45");
+        pxRect(o.x+o.w-2,o.y+18,8,7,"#5f8f45");
+      }
+    }
+
+    function drawGame(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.imageSmoothingEnabled=false;
+
+      // Paper sky
+      pxRect(0,0,canvas.width,canvas.height,"#f8f8f4");
+
+      // Base blue pixel skyline
+      for(let i=0;i<12;i++){
+        const x=i*58 + 18;
+        const h=18 + (i%4)*8;
+        pxRect(x,groundY-h-14,34,h,"#dbe5ff");
+      }
+
+      // Clouds
+      pxRect(420,35,50,7,"#dfddd5");
+      pxRect(438,29,24,7,"#dfddd5");
+      pxRect(145,48,38,6,"#e5e2db");
+
+      // Ground + road ticks
+      pxRect(0,groundY,canvas.width,3,"#161616");
+      for(let x=0;x<canvas.width;x+=34) pxRect(x,groundY+13,18,3,"#c4c0b7");
+
+      // Base blue line
+      pxRect(0,groundY+34,canvas.width,5,"#0052ff");
+
+      obstacles.forEach(drawObstacle);
+      drawDino();
+
+      // tiny dust
+      dust.forEach(p=>pxRect(p.x,p.y,3,3,"#a8a49a"));
+
+      // corner tag
+      ctx.fillStyle="#161616";
+      ctx.font="bold 12px monospace";
+      ctx.fillText("RAWR RUN // BASE", 12, 20);
+    }
+
+    function update(dt){
+      dino.vy += 1450*dt;
+      dino.y += dino.vy*dt;
+      if(dino.y >= groundY-dino.h){
+        dino.y = groundY-dino.h;
+        dino.vy=0;
+        dino.grounded=true;
+      }
+
+      spawnTimer += dt*1000;
+      if(spawnTimer >= nextSpawn){
+        spawnTimer=0;
+        nextSpawn=rand(850,1400);
+        spawnObstacle();
+      }
+
+      for(const o of obstacles){
+        o.x -= speed*dt;
+        if(!o.passed && o.x+o.w < dino.x){
+          o.passed=true;
+          score++;
+          speed = Math.min(410, speed+4.5);
+          updateGameUi();
+          if(score >= GAME_TARGET){ winGame(); return; }
+        }
+        if(collision(dino,o)){ gameOver(); return; }
+      }
+      obstacles = obstacles.filter(o=>o.x+o.w>-20);
+
+      if(dino.grounded && Math.random()<.13){
+        dust.push({x:dino.x+4,y:groundY-3,life:.3});
+      }
+      dust.forEach(p=>{p.x-=80*dt;p.life-=dt});
+      dust=dust.filter(p=>p.life>0);
+    }
+
+    function loop(now){
+      if(!running) return;
+      const dt=Math.min(.032,(now-lastTime)/1000);
+      lastTime=now;
+      update(dt);
+      drawGame();
+      if(running) requestAnimationFrame(loop);
+    }
+
+    startBtn.addEventListener("click", startGame);
+    canvas.addEventListener("pointerdown", (e)=>{e.preventDefault();jump();});
+    window.addEventListener("keydown", (e)=>{
+      if(e.code==="Space" || e.code==="ArrowUp"){
+        const active=document.activeElement;
+        if(active && (active.tagName==="INPUT" || active.tagName==="TEXTAREA")) return;
+        e.preventDefault(); jump();
+      }
+    });
+
+    setClaimUnlocked(gameUnlocked);
+    drawGame();
 
     const form = document.getElementById("claim-form");
     const btn = document.getElementById("submit-btn");
@@ -395,6 +759,9 @@
       const bot = document.getElementById("botcheck").value.trim();
 
       if (bot) return;
+      if (!gameUnlocked) {
+        status.textContent = t("err_game"); status.className = "status err"; return;
+      }
       if (!validAddress(wallet)) {
         status.textContent = t("err_wallet"); status.className = "status err"; return;
       }
@@ -413,7 +780,9 @@
       body.append("twitter_handle", handle);
       // Keep the existing field name for compatibility with the previous Google Sheet script.
       body.append("retweet_confirmed", "yes");
-      body.append("source", "rawr-preclaim");
+      body.append("game_score", String(GAME_TARGET));
+      body.append("game_completed", "yes");
+      body.append("source", "rawr-preclaim-game");
 
       try {
         await fetch(SHEET_ENDPOINT, {
