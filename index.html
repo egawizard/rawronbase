@@ -165,6 +165,12 @@
     .step:first-of-type{margin-top:8px}
     .num{width:28px;height:28px;border:2px solid var(--line);display:grid;place-items:center;font:900 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--acid);flex:0 0 auto}
     .step a{text-decoration-thickness:2px;text-underline-offset:3px}
+    .retweet-btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:50px;
+      margin:14px 0 2px;border:2px solid var(--line);background:#161616;color:#fff;text-decoration:none;
+      font-weight:950;letter-spacing:.02em;box-shadow:4px 4px 0 #0052ff;transition:transform .12s ease,box-shadow .12s ease
+    }
+    .retweet-btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #0052ff}
 
     form{margin-top:18px}
     label{display:block;margin:15px 0 7px;font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
@@ -244,11 +250,13 @@
 
       <section class="card" id="preclaim">
         <h2 data-i18n="card_title">Join the whitelist.</h2>
-        <p data-i18n="card_sub">Follow RAWR NFT on X, add your wallet, and lock in your preclaim entry.</p>
+        <p data-i18n="card_sub">Follow RAWR NFT on X, retweet the official post, then add your wallet to lock in your preclaim entry.</p>
 
         <div class="step"><span class="num">01</span><span><span data-i18n="step_follow">Follow</span> <a href="https://x.com/rawrNft_base" target="_blank" rel="noopener">@rawrNft_base</a></span></div>
-        <div class="step"><span class="num">02</span><span data-i18n="step_wallet">Enter the wallet you plan to use.</span></div>
-        <div class="step"><span class="num">03</span><span data-i18n="step_submit">Submit once. You're done.</span></div>
+        <div class="step"><span class="num">02</span><span data-i18n="step_retweet">Retweet the official whitelist post.</span></div>
+        <a class="retweet-btn" href="https://x.com/rawrNft_base/status/2093226701966954554?s=20" target="_blank" rel="noopener" data-i18n="retweet_btn">OPEN POST &amp; RETWEET ↗</a>
+        <div class="step"><span class="num">03</span><span data-i18n="step_wallet">Enter the wallet you plan to use.</span></div>
+        <div class="step"><span class="num">04</span><span data-i18n="step_submit">Confirm your retweet and submit once.</span></div>
 
         <form id="claim-form" novalidate>
           <label for="wallet" data-i18n="wallet_label">Wallet address</label>
@@ -259,7 +267,12 @@
 
           <label class="check" for="follow-confirm">
             <input id="follow-confirm" type="checkbox" />
-            <span data-i18n="follow_confirm">I've followed @rawrNft_base and want to join the RAWR NFT whitelist.</span>
+            <span data-i18n="follow_confirm">I've followed @rawrNft_base.</span>
+          </label>
+
+          <label class="check" for="retweet-confirm">
+            <input id="retweet-confirm" type="checkbox" />
+            <span data-i18n="retweet_confirm">I've retweeted the official RAWR NFT post. Retweet is required before whitelist preclaim.</span>
           </label>
 
           <div class="honeypot" aria-hidden="true"><label>Website<input id="botcheck" name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
@@ -292,14 +305,16 @@
         speech: "DON'T OVERTHINK IT. JUST RAWR.",
         network_note: "RAWR NFT lives on Base — an Ethereum Layer 2 network. Total supply: 6,969 NFTs. Mint price: free.",
         card_title: "Join the whitelist.",
-        card_sub: "Follow RAWR NFT on X, add your wallet, and lock in your preclaim entry.",
-        step_follow: "Follow", step_wallet: "Enter the wallet you plan to use.", step_submit: "Submit once. You're done.",
+        card_sub: "Follow RAWR NFT on X, retweet the official post, then add your wallet to lock in your preclaim entry.",
+        step_follow: "Follow", step_retweet: "Retweet the official whitelist post.", retweet_btn: "OPEN POST & RETWEET ↗", step_wallet: "Enter the wallet you plan to use.", step_submit: "Confirm your retweet and submit once.",
         wallet_label: "Wallet address", handle_label: "X handle (optional)",
-        follow_confirm: "I've followed @rawrNft_base and want to join the RAWR NFT whitelist.",
+        follow_confirm: "I've followed @rawrNft_base.",
+        retweet_confirm: "I've retweeted the official RAWR NFT post. Retweet is required before whitelist preclaim.",
         submit: "PRECLAIM WHITELIST", submitting: "SUBMITTING...",
         fine: "Never share your seed phrase or private key. This form only asks for a public wallet address.",
         err_wallet: "Enter a valid EVM wallet address (0x + 40 hex characters).",
         err_follow: "Please follow @rawrNft_base and confirm the checkbox first.",
+        err_retweet: "Retweet is required. Open the official post, retweet it, then confirm the checkbox.",
         err_network: "Could not submit right now. Please try again.",
         ok: "RAWR! Your whitelist preclaim has been submitted. 🦖"
       },
@@ -312,14 +327,16 @@
         speech: "别想太多。RAWR 就对了。",
         network_note: "RAWR NFT 位于 Base 网络 — 以太坊 Layer 2 网络。总供应量：6,969 枚 NFT。铸造价格：免费。",
         card_title: "加入白名单。",
-        card_sub: "在 X 上关注 RAWR NFT，填写钱包地址，完成白名单预登记。",
-        step_follow: "关注", step_wallet: "填写你准备使用的钱包地址。", step_submit: "只需提交一次，即可完成。",
+        card_sub: "在 X 上关注 RAWR NFT，转发官方帖子，然后填写钱包地址完成白名单预登记。",
+        step_follow: "关注", step_retweet: "转发官方白名单帖子。", retweet_btn: "打开帖子并转发 ↗", step_wallet: "填写你准备使用的钱包地址。", step_submit: "确认已转发，然后提交一次即可。",
         wallet_label: "钱包地址", handle_label: "X 用户名（可选）",
-        follow_confirm: "我已关注 @rawrNft_base，并希望加入 RAWR NFT 白名单。",
+        follow_confirm: "我已关注 @rawrNft_base。",
+        retweet_confirm: "我已转发 RAWR NFT 官方帖子。完成白名单预登记前必须转发。",
         submit: "预登记白名单", submitting: "提交中...",
         fine: "绝不要分享助记词或私钥。本表单只需要你的公开钱包地址。",
         err_wallet: "请输入有效的 EVM 钱包地址（0x + 40 位十六进制字符）。",
         err_follow: "请先关注 @rawrNft_base 并勾选确认。",
+        err_retweet: "必须先转发。请打开官方帖子完成转发，然后勾选确认。",
         err_network: "暂时无法提交，请稍后重试。",
         ok: "RAWR！你的白名单预登记已提交。🦖"
       }
@@ -358,6 +375,7 @@
       const wallet = document.getElementById("wallet").value.trim();
       const handle = document.getElementById("handle").value.trim();
       const followed = document.getElementById("follow-confirm").checked;
+      const retweeted = document.getElementById("retweet-confirm").checked;
       const bot = document.getElementById("botcheck").value.trim();
 
       if (bot) return;
@@ -366,6 +384,9 @@
       }
       if (!followed) {
         status.textContent = t("err_follow"); status.className = "status err"; return;
+      }
+      if (!retweeted) {
+        status.textContent = t("err_retweet"); status.className = "status err"; return;
       }
 
       btn.disabled = true;
