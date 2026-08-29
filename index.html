@@ -3,806 +3,266 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f4f1e9" />
-  <meta property="og:title" content="RAWR NFT — Base Whitelist Preclaim" />
-  <meta property="og:description" content="RAWR NFT lives on Base. 6,969 total supply, free mint. Preclaim your whitelist spot before the next phase begins." />
-  <meta property="og:image" content="https://files.catbox.moe/f8xafn.png" />
-  <title>RAWR NFT — Preclaim Whitelist</title>
-  <meta name="description" content="RAWR NFT on Base — 6,969 total supply, free mint, whitelist preclaim. Submit your wallet before the next phase begins." />
-  <link rel="icon" type="image/png" href="assets/rawr-icon-512.png" />
-  <link rel="shortcut icon" href="favicon.ico" />
-  <link rel="apple-touch-icon" href="assets/favicon-180.png" />
+  <title>RAWR NFT | On Base</title>
+  <meta name="description" content="RAWR NFT is live on Base — 6969 supply, freemint, mint now on OpenSea." />
+  <meta name="theme-color" content="#050816" />
+  <meta property="og:title" content="RAWR NFT | On Base" />
+  <meta property="og:description" content="6969 unique RAWR NFTs. Freemint is freemint. Stay RAWR." />
+  <meta property="og:image" content="assets/hero.jpg" />
+  <link rel="icon" type="image/png" href="assets/rawr-icon.png" />
   <style>
     :root{
-      --paper:#f4f1e9;
-      --ink:#161616;
-      --muted:#67645e;
-      --line:#161616;
-      --acid:#d8ff3e;
-      --white:#fffdf7;
-      --shadow:8px 8px 0 #161616;
+      --bg:#060816;--panel:#0c1023;--panel2:#111735;--line:#26305d;--text:#f4f6ff;--muted:#a7b0d6;
+      --pink:#ff4fa2;--green:#7dff63;--blue:#49a0ff;--cyan:#12f3e0;--yellow:#ffe14a;--red:#ff4d37;
+      --shadow:0 0 0 1px rgba(121,138,233,.22), 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.03);
     }
-
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      min-height:100vh;
-      color:var(--ink);
-      background:
-        linear-gradient(rgba(22,22,22,.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(22,22,22,.045) 1px, transparent 1px),
-        var(--paper);
-      background-size:28px 28px;
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 15% 15%,rgba(255,79,162,.08),transparent 28%),radial-gradient(circle at 90% 10%,rgba(18,243,224,.09),transparent 22%),radial-gradient(circle at 85% 85%,rgba(73,160,255,.12),transparent 30%),linear-gradient(180deg,#050713 0%,#090d1f 55%,#060816 100%);color:var(--text)}
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .wrap{width:min(1380px,calc(100% - 40px));margin:0 auto}
 
-    a{color:inherit}
-    button,input{font:inherit}
-    .wrap{width:min(1120px, calc(100% - 32px)); margin:0 auto}
+    .site-header{position:sticky;top:0;z-index:50;background:rgba(5,8,22,.85);backdrop-filter:blur(14px);border-bottom:1px solid rgba(105,122,207,.25)}
+    .site-header .inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 0}
+    .brand{display:flex;align-items:center;gap:14px;min-width:170px}
+    .brand img{width:54px;height:54px;border-radius:12px;box-shadow:var(--shadow)}
+    .brand-text{font-weight:900;font-size:2.35rem;line-height:.9;letter-spacing:.04em;color:#ff5aa8;text-shadow:0 0 18px rgba(255,90,168,.35)}
+    .nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
+    .nav a{padding:10px 14px;border-radius:12px;font-weight:800;font-size:.98rem;color:#dfe5ff;opacity:.92}
+    .nav a.active,.nav a:hover{background:rgba(255,255,255,.06);box-shadow:inset 0 -3px 0 #5eff8f}
+    .header-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+    .pill{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:14px;border:1px solid #3e5fe7;background:linear-gradient(180deg,#0f1a41,#0d1431);box-shadow:var(--shadow);font-weight:900}
+    .base-dot{width:22px;height:22px;border-radius:50%;background:#fff;position:relative}
+    .base-dot::before{content:"";position:absolute;inset:5px;border-radius:50%;background:#2962ff}
+    .lang{display:flex;align-items:center;gap:10px;font-weight:900}
+    .lang button{background:none;border:none;color:#dbe3ff;font-weight:900;font-size:1rem;cursor:pointer;opacity:.65;padding:4px 0}
+    .lang button.active{color:#89ff6d;opacity:1}
 
-    .topbar{
-      min-height:74px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      border-bottom:2px solid var(--line);
-    }
-    .brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:-.04em;font-size:22px}
-    .brand img{width:38px;height:38px;image-rendering:pixelated;border:2px solid var(--line);background:#fff}
-    .nav-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .hero-shell{padding:28px 0 20px}
+    .hero-card{position:relative;overflow:hidden;border-radius:28px;border:1px solid rgba(83,106,219,.35);background:linear-gradient(180deg,rgba(7,12,32,.95),rgba(9,12,27,.96));box-shadow:0 0 0 1px rgba(255,255,255,.02),0 24px 80px rgba(0,0,0,.5)}
+    .hero-card::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,11,30,.96) 0%,rgba(8,13,31,.88) 34%,rgba(8,13,31,.38) 55%,rgba(8,13,31,.12) 70%,rgba(8,13,31,.06) 100%);z-index:1}
+    .hero-grid{position:relative;display:grid;grid-template-columns: 470px 1fr;min-height:760px;align-items:stretch}
+    .hero-copy{position:relative;z-index:2;padding:38px 34px 34px 34px;display:flex;flex-direction:column;justify-content:center}
+    .eyebrow-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+    .eyebrow{font-weight:900;font-size:1.05rem;color:#f4f6ff;display:flex;align-items:center;gap:10px}
+    .eyebrow::before{content:"▶";font-size:.8rem;color:#63ffd7}
+    .small-pill{padding:8px 14px;border-radius:12px;background:#245ee4;border:1px solid #71a7ff;font-weight:900;box-shadow:var(--shadow)}
+    .kicker{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+    .big-title{font-size:7rem;line-height:.82;font-weight:1000;letter-spacing:-.05em;margin:8px 0 0;color:var(--yellow);text-transform:uppercase;text-shadow:-4px 4px 0 #111,-8px 8px 0 var(--red),0 0 24px rgba(255,225,74,.16)}
+    .subline{margin-top:6px;font-size:4rem;line-height:.9;font-weight:1000;letter-spacing:-.05em;text-transform:uppercase}
+    .subline .rawr{color:#47ff7d;text-shadow:-3px 3px 0 #111,-6px 6px 0 var(--red)}
+    .subline .on{color:#f7f8fb;font-size:.75em;vertical-align:middle}
+    .subline .base{color:#2fa2ff;text-shadow:-3px 3px 0 #111,-6px 6px 0 var(--red)}
+    .hero-desc{margin:30px 0 0;font-size:1.25rem;font-weight:900;line-height:1.28;letter-spacing:.01em}
+    .hero-desc .green{color:#7fff70}
+    .cta-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 28px;border-radius:16px;border:2px solid #7690ff;font-weight:1000;font-size:1.05rem;letter-spacing:.03em;box-shadow:var(--shadow);transition:.2s transform,.2s box-shadow,.2s background}
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{background:linear-gradient(180deg,#4b9cff,#2e73ff);border-color:#91c5ff;color:#fff;box-shadow:0 10px 25px rgba(25,97,255,.35),var(--shadow)}
+    .btn.secondary{background:rgba(8,13,31,.62);border-color:#53ff7b;color:#fff}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+    .stat{border-radius:18px;background:linear-gradient(180deg,rgba(9,14,35,.92),rgba(11,17,41,.95));border:1px solid rgba(115,129,255,.28);padding:18px;box-shadow:var(--shadow)}
+    .stat .label{display:block;color:#d5dcff;font-size:.88rem;font-weight:900;opacity:.84;margin-bottom:12px;text-transform:uppercase}
+    .stat .value{font-size:2.25rem;font-weight:1000;line-height:1;color:#86ff67}
+    .stat .icon{font-size:1.9rem;margin-right:10px}
+    .benefits{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:16px;padding:14px 18px;border-radius:18px;border:1px solid rgba(84,121,255,.28);background:rgba(13,19,45,.76);box-shadow:var(--shadow);font-weight:900}
+    .benefits .pink{color:#ff76b9}
+    .hero-art{position:relative;z-index:0;min-height:100%}
+    .hero-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(1.1) contrast(1.04)}
 
-    .base-chip{
-      border:2px solid var(--line);background:#0052ff;color:#fff;min-height:40px;padding:0 13px;
-      display:inline-flex;align-items:center;gap:8px;font-weight:950;text-decoration:none;letter-spacing:.01em;
-      box-shadow:3px 3px 0 var(--line);
-    }
-    .base-dot{width:10px;height:10px;border-radius:50%;background:#fff;display:inline-block}
+    .ticker{margin-top:16px;border:1px solid rgba(100,124,255,.25);border-radius:18px;background:rgba(10,15,33,.9);box-shadow:var(--shadow);overflow:hidden}
+    .ticker-inner{display:flex;align-items:center;gap:18px;padding:14px 18px;white-space:nowrap}
+    .badge-news{flex:none;padding:10px 14px;border-radius:12px;border:1px solid #54ff78;color:#94ff70;font-weight:1000;background:rgba(17,34,16,.65)}
+    .ticker-track{display:flex;gap:32px;min-width:max-content;animation:marquee 18s linear infinite;font-weight:900;color:#eff2ff}
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .ticker-track span{opacity:.92}
+    .ticker-icons{margin-left:auto;display:flex;align-items:center;gap:18px;color:#8fff6c;font-size:1.65rem;flex:none}
 
-    .chip,.x-link,.lang button{
-      border:2px solid var(--line);
-      background:var(--white);
-      min-height:40px;
-      padding:0 14px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:850;
-      text-decoration:none;
-      color:var(--ink);
-    }
-    .x-link:hover,.lang button:hover{background:var(--acid)}
-    .mint-link{
-      border:2px solid var(--line);background:var(--acid);color:var(--ink);min-height:40px;padding:0 14px;
-      display:inline-flex;align-items:center;justify-content:center;font-weight:1000;text-decoration:none;
-      box-shadow:3px 3px 0 var(--line);transition:transform .12s ease,box-shadow .12s ease
-    }
-    .mint-link:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--line)}
-    .lang{display:flex}
-    .lang button{cursor:pointer;margin-left:-2px}
-    .lang button:first-child{margin-left:0}
-    .lang button.active{background:var(--ink);color:#fff}
+    .section{padding:44px 0}
+    .section-title{font-size:2.1rem;font-weight:1000;margin:0 0 14px}
+    .section-title .accent{color:#7dff63}
+    .section-text{font-size:1.08rem;color:var(--muted);line-height:1.7;max-width:760px}
+    .info-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start}
+    .panel{padding:26px;border-radius:24px;background:linear-gradient(180deg,rgba(12,16,35,.95),rgba(9,13,28,.95));border:1px solid rgba(106,123,219,.25);box-shadow:var(--shadow)}
+    .card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
+    .mini-card{padding:18px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(115,131,255,.18)}
+    .mini-card h3{margin:0 0 8px;font-size:1.05rem}
+    .mini-card p{margin:0;color:var(--muted);line-height:1.55}
+    .faq{display:grid;gap:12px;margin-top:16px}
+    details{border:1px solid rgba(115,131,255,.18);background:rgba(255,255,255,.025);border-radius:16px;padding:16px 18px}
+    summary{cursor:pointer;font-weight:900}
+    details p{color:var(--muted);margin:12px 0 0;line-height:1.6}
+    .footer{padding:28px 0 46px;color:#c4ccf0}
+    .footer .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(106,123,219,.22);padding-top:20px}
+    .socials{display:flex;gap:16px;align-items:center}
+    .socials a{padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(115,131,255,.18);font-weight:900}
 
-    main{padding:54px 0 72px}
-    .grid{display:grid;grid-template-columns:1.04fr .96fr;gap:42px;align-items:center}
-
-    .hero{position:relative}
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:9px;
-      border:2px solid var(--line);background:var(--acid);
-      padding:8px 11px;font:800 12px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace;
-      letter-spacing:.08em;text-transform:uppercase;
-      box-shadow:4px 4px 0 var(--line);
+    @media (max-width: 1180px){
+      .hero-grid{grid-template-columns:1fr;min-height:auto}
+      .hero-card::before{background:linear-gradient(180deg,rgba(8,13,31,.96) 0%,rgba(8,13,31,.82) 38%,rgba(8,13,31,.35) 100%)}
+      .hero-copy{padding-bottom:0}
+      .hero-art{min-height:420px}
+      .hero-art img{position:relative;height:420px}
+      .big-title{font-size:5.5rem}
+      .subline{font-size:3rem}
+      .info-grid{grid-template-columns:1fr}
     }
-    h1{
-      margin:24px 0 14px;
-      font-size:clamp(62px, 10vw, 128px);
-      line-height:.78;
-      letter-spacing:-.085em;
-      font-weight:1000;
-    }
-    .sub{
-      margin:0;
-      max-width:650px;
-      font-size:clamp(18px,2vw,25px);
-      line-height:1.38;
-      font-weight:700;
-    }
-    .muted{color:var(--muted);font-weight:600}
-
-
-    .collection-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px;max-width:520px}
-    .fact{border:2px solid var(--line);background:var(--ink);color:#fff;padding:14px 16px;box-shadow:4px 4px 0 var(--acid)}
-    .fact-value{font:1000 24px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:-.03em}
-    .fact-label{margin-top:6px;font:850 10px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:#d8ff3e}
-
-    .signal-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-    .signal{
-      border:2px solid var(--line);
-      background:var(--white);
-      padding:10px 12px;
-      font:800 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-      text-transform:uppercase;
-    }
-
-    .mascot-wrap{margin-top:34px;display:flex;align-items:flex-end;gap:16px}
-    .mascot{
-      width:min(260px,46vw);aspect-ratio:1;
-      background:#fff;border:2px solid var(--line);box-shadow:var(--shadow);
-      display:grid;place-items:center;overflow:hidden
-    }
-    .mascot img{width:100%;height:100%;object-fit:cover;image-rendering:pixelated;filter:contrast(1.05)}
-    .speech{
-      border:2px solid var(--line);background:var(--acid);padding:13px 15px;
-      font:900 13px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace;
-      max-width:220px;position:relative
-    }
-    .speech:before{content:"";position:absolute;left:-12px;bottom:20px;width:18px;height:18px;background:var(--acid);border-left:2px solid var(--line);border-bottom:2px solid var(--line);transform:rotate(45deg)}
-
-    .network-note{
-      margin-top:20px;border-left:6px solid #0052ff;padding:10px 13px;background:#fff;
-      font:850 13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;max-width:610px;
-    }
-    .network-note strong{color:#0052ff}
-    .mint-hero{
-      margin-top:18px;min-height:58px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;
-      border:2px solid var(--line);background:#0052ff;color:#fff;text-decoration:none;font-weight:1000;
-      letter-spacing:.02em;box-shadow:5px 5px 0 var(--line);transition:transform .12s ease,box-shadow .12s ease
-    }
-    .mint-hero:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--line)}
-
-    .card{
-      background:var(--white);
-      border:2px solid var(--line);
-      box-shadow:var(--shadow);
-      padding:28px;
-      position:relative;
-    }
-    .card:before{
-      content:"WHITELIST TERMINAL";
-      position:absolute;top:-16px;right:18px;
-      background:var(--ink);color:white;border:2px solid var(--line);
-      padding:6px 9px;
-      font:800 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-      letter-spacing:.12em;
-    }
-    .card h2{font-size:32px;letter-spacing:-.04em;margin:4px 0 8px}
-    .card p{margin:0 0 22px;color:var(--muted);line-height:1.5;font-weight:600}
-
-    .step{
-      display:flex;gap:12px;align-items:center;border-top:1px dashed #aaa59b;padding:14px 0;
-      font-weight:780;font-size:14px
-    }
-    .step:first-of-type{margin-top:8px}
-    .num{width:28px;height:28px;border:2px solid var(--line);display:grid;place-items:center;font:900 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--acid);flex:0 0 auto}
-    .step a{text-decoration-thickness:2px;text-underline-offset:3px}
-    .retweet-btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:50px;
-      margin:14px 0 2px;border:2px solid var(--line);background:#161616;color:#fff;text-decoration:none;
-      font-weight:950;letter-spacing:.02em;box-shadow:4px 4px 0 #0052ff;transition:transform .12s ease,box-shadow .12s ease
-    }
-    .retweet-btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #0052ff}
-
-    form{margin-top:18px}
-    label{display:block;margin:15px 0 7px;font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
-    input[type="text"]{
-      width:100%;height:52px;border:2px solid var(--line);background:#fff;padding:0 13px;outline:none;font-weight:700;border-radius:0
-    }
-    input[type="text"]:focus{box-shadow:4px 4px 0 var(--acid)}
-    .check{display:flex;gap:10px;align-items:flex-start;margin:16px 0 18px;font-size:13px;font-weight:700;line-height:1.35}
-    .check input{width:19px;height:19px;accent-color:#161616;margin-top:0;flex:0 0 auto}
-    .honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
-
-    .submit{
-      width:100%;min-height:56px;border:2px solid var(--line);background:var(--acid);color:var(--ink);
-      font-weight:1000;letter-spacing:.025em;cursor:pointer;box-shadow:5px 5px 0 var(--line);
-      transition:transform .12s ease, box-shadow .12s ease
-    }
-    .submit:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--line)}
-    .submit:disabled{cursor:not-allowed;opacity:.6;transform:none;box-shadow:none}
-
-    .status{min-height:22px;margin-top:14px;font-size:13px;font-weight:850}
-    .status.ok{color:#147a26}.status.err{color:#b42318}
-    .fine{font-size:11.5px!important;margin:12px 0 0!important;color:#77736b!important}
-
-
-    /* ---------- RAWR RUN whitelist gate ---------- */
-    .game-gate{
-      margin:18px 0 20px;
-      border:2px solid var(--line);
-      background:#fff;
-      box-shadow:5px 5px 0 var(--line);
-      overflow:hidden;
-    }
-    .game-head{
-      display:flex;justify-content:space-between;align-items:center;gap:12px;
-      padding:11px 12px;border-bottom:2px solid var(--line);background:var(--acid);
-    }
-    .game-title{
-      font:1000 14px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-      letter-spacing:.08em;text-transform:uppercase;
-    }
-    .game-score{
-      border:2px solid var(--line);background:#fff;padding:6px 9px;
-      font:950 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-      white-space:nowrap;
-    }
-    .game-stage{position:relative;background:#f8f8f4}
-    #rawr-game{
-      display:block;width:100%;height:auto;aspect-ratio:16/5;
-      image-rendering:pixelated;touch-action:manipulation;cursor:pointer;
-    }
-    .game-overlay{
-      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-      pointer-events:none;padding:14px;text-align:center;
-    }
-    .game-overlay-box{
-      background:rgba(255,253,247,.94);border:2px solid var(--line);
-      padding:10px 14px;font:950 12px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;
-      box-shadow:4px 4px 0 var(--line);
-    }
-    .game-controls{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      border-top:2px solid var(--line);padding:10px 12px;background:#fff;
-    }
-    .game-help{
-      color:var(--muted);font:800 10px/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;
-    }
-    .game-btn{
-      border:2px solid var(--line);background:#161616;color:#fff;padding:9px 12px;
-      font:950 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-      cursor:pointer;box-shadow:3px 3px 0 #0052ff;
-    }
-    .game-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #0052ff}
-    .gate-status{
-      margin:12px 0 4px;padding:10px 12px;border:2px dashed #aaa59b;background:#faf8f2;
-      font:900 11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;
-    }
-    .gate-status.unlocked{border-style:solid;background:#eaffe0;color:#146c24}
-    .claim-locked input[type="text"],
-    .claim-locked .check{opacity:.46}
-    input[type="text"]:disabled{cursor:not-allowed;background:#eceae4;color:#777}
-    @media (max-width:560px){
-      .game-controls{align-items:flex-start;flex-direction:column}
-      .game-btn{width:100%}
-      #rawr-game{aspect-ratio:16/6}
-    }
-
-    footer{border-top:2px solid var(--line);padding:24px 0 36px;font-size:12px;font-weight:700;color:var(--muted)}
-    .footer-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
-
-    @media (max-width:860px){
-      .grid{grid-template-columns:1fr;gap:54px}
-      .hero{text-align:center}.sub{margin-inline:auto}.collection-facts{margin-inline:auto}.signal-row,.mascot-wrap{justify-content:center}
-      .topbar{padding:12px 0;align-items:flex-start}.brand{padding-top:3px}
-      .nav-actions{max-width:70%}
-    }
-    @media (max-width:560px){
-      .wrap{width:min(100% - 20px,1120px)}
-      main{padding-top:34px}
-      .topbar{display:block}.nav-actions{max-width:none;margin-top:10px;justify-content:flex-start}
-      .x-link{flex:1}.card{padding:22px 18px}.mascot-wrap{align-items:center;flex-direction:column}.speech{max-width:260px}.speech:before{display:none}
-      h1{font-size:74px}.collection-facts{grid-template-columns:1fr 1fr}.fact{padding:12px}.fact-value{font-size:20px}
+    @media (max-width: 760px){
+      .wrap{width:min(100% - 22px,1380px)}
+      .site-header .inner{padding:14px 0}
+      .brand-text{font-size:2rem}
+      .nav{display:none}
+      .big-title{font-size:3.95rem}
+      .subline{font-size:2.2rem}
+      .hero-desc{font-size:1.05rem}
+      .hero-copy{padding:22px 18px 0}
+      .cta-row{flex-direction:column}
+      .btn{width:100%}
+      .stats{grid-template-columns:1fr}
+      .hero-art{min-height:300px}
+      .hero-art img{height:300px}
+      .card-grid{grid-template-columns:1fr}
+      .ticker-inner{gap:12px}
+      .ticker-icons{display:none}
     }
   </style>
 </head>
 <body>
-  <header class="wrap topbar">
-    <div class="brand"><img src="https://files.catbox.moe/f8xafn.png" onerror="this.onerror=null;this.src='assets/rawr-logo.png'" alt="RAWR NFT logo" /> RAWR NFT</div>
-    <div class="nav-actions">
-      <div class="base-chip"><span class="base-dot"></span><span data-i18n="base_nav">BASE NETWORK</span></div>
-      <a class="mint-link" href="https://opensea.io/collection/rawr-on-base/overview" target="_blank" rel="noopener" data-i18n="mint_nav">MINT ON OPENSEA ↗</a>
-      <a class="x-link" href="https://x.com/rawrNft_base" target="_blank" rel="noopener">X / @rawrNft_base ↗</a>
-      <div class="lang" aria-label="Language">
-        <button type="button" id="lang-en" class="active">EN</button>
-        <button type="button" id="lang-zh">中文</button>
+  <header class="site-header">
+    <div class="wrap inner">
+      <a href="#home" class="brand" aria-label="RAWR NFT Home">
+        <img src="assets/rawr-icon.png" alt="RAWR icon" />
+        <div class="brand-text">RAWR</div>
+      </a>
+      <nav class="nav">
+        <a href="#home" class="active" data-i18n="navHome">HOME</a>
+        <a href="#about" data-i18n="navAbout">ABOUT</a>
+        <a href="#collection" data-i18n="navCollection">COLLECTION</a>
+        <a href="#mint" data-i18n="navMint">MINT</a>
+        <a href="#faq" data-i18n="navFaq">FAQ</a>
+      </nav>
+      <div class="header-right">
+        <div class="pill"><span class="base-dot"></span> BASE</div>
+        <div class="lang"><button id="enBtn" class="active">EN</button><span>/</span><button id="zhBtn">ZH</button></div>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="grid">
-      <section class="hero">
-        <div class="eyebrow" data-i18n="eyebrow">PRECLAIM · WHITELIST OPEN</div>
-        <h1>RAWR!</h1>
-        <p class="sub" data-i18n="hero">A tiny pixel beast is waking up on Base. 6,969 total supply. Free mint. Get your wallet on the RAWR NFT whitelist before the next phase begins.</p>
-        <div class="collection-facts">
-          <div class="fact"><div class="fact-value">6,969</div><div class="fact-label" data-i18n="fact_supply">TOTAL NFT SUPPLY</div></div>
-          <div class="fact"><div class="fact-value" data-i18n="fact_free_value">FREE</div><div class="fact-label" data-i18n="fact_mint">MINT PRICE</div></div>
-        </div>
-        <div class="signal-row">
-          <div class="signal" data-i18n="badge_free">FREE MINT</div>
-          <div class="signal" data-i18n="badge_wallet">NO WALLET CONNECT</div>
-          <div class="signal" data-i18n="badge_one">ONE ENTRY / WALLET</div>
-          <div class="signal" data-i18n="badge_base">BUILT ON BASE</div>
-        </div>
-        <div class="mascot-wrap">
-          <div class="mascot"><img src="https://files.catbox.moe/f8xafn.png" onerror="this.onerror=null;this.src='assets/rawr-logo.png'" alt="RAWR pixel mascot" /></div>
-          <div class="speech" data-i18n="speech">DON'T OVERTHINK IT. JUST RAWR.</div>
-        </div>
-        <div class="network-note" data-i18n="network_note"><strong>RAWR NFT</strong> lives on <strong>Base</strong> — an Ethereum Layer 2 network.</div>
-        <a class="mint-hero" href="https://opensea.io/collection/rawr-on-base/overview" target="_blank" rel="noopener" data-i18n="mint_hero">MINT RAWR NFT ON OPENSEA ↗</a>
-      </section>
-
-      <section class="card" id="preclaim">
-        <h2 data-i18n="card_title">Join the whitelist.</h2>
-        <p data-i18n="card_sub">Follow RAWR NFT on X, retweet the official post, then survive RAWR RUN and score 20 points to unlock wallet entry.</p>
-
-        <div class="step"><span class="num">01</span><span><span data-i18n="step_follow">Follow</span> <a href="https://x.com/rawrNft_base" target="_blank" rel="noopener">@rawrNft_base</a></span></div>
-        <div class="step"><span class="num">02</span><span data-i18n="step_retweet">Retweet the official whitelist post.</span></div>
-        <a class="retweet-btn" href="https://x.com/rawrNft_base/status/2093320470120829132?s=20" target="_blank" rel="noopener" data-i18n="retweet_btn">OPEN POST &amp; RETWEET ↗</a>
-        <div class="step"><span class="num">03</span><span data-i18n="step_game">Score 20 points in RAWR RUN to unlock the claim terminal.</span></div>
-
-        <div class="game-gate" id="game-gate">
-          <div class="game-head">
-            <div class="game-title" data-i18n="game_title">RAWR RUN · WHITELIST GATE</div>
-            <div class="game-score" id="game-score">SCORE 0 / 20</div>
+  <main id="home" class="wrap hero-shell">
+    <section class="hero-card">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow-row">
+            <div class="eyebrow" data-i18n="eyebrow">RAWR NFT</div>
+            <div class="small-pill" data-i18n="onBase">ON BASE</div>
           </div>
-          <div class="game-stage">
-            <canvas id="rawr-game" width="640" height="200" aria-label="RAWR RUN game"></canvas>
-            <div class="game-overlay" id="game-overlay">
-              <div class="game-overlay-box" id="game-overlay-text" data-i18n="game_ready">PRESS START · REACH 20 POINTS</div>
-            </div>
+          <div class="big-title" data-i18n="today">TODAY</div>
+          <div class="subline"><span class="rawr">RAWR</span> <span class="on" data-i18n="on">on</span> <span class="base">BASE</span></div>
+          <p class="hero-desc"><span data-i18n="supplyText">6969 UNIQUE RAWR NFTs.</span><br><span class="green" data-i18n="freeText">FREEMINT.</span> <span data-i18n="stayText">STAY RAWR.</span></p>
+          <div class="cta-row">
+            <a class="btn primary" href="https://opensea.io/collection/rawr-on-base/overview" target="_blank" rel="noopener" data-i18n="btnMint">MINT ON OPENSEA</a>
+            <a class="btn secondary" href="https://opensea.io/collection/rawr-on-base/overview" target="_blank" rel="noopener" data-i18n="btnCollection">VIEW COLLECTION</a>
           </div>
-          <div class="game-controls">
-            <div class="game-help" data-i18n="game_help">SPACE / ↑ / TAP = JUMP · PASS AN OBSTACLE = +1</div>
-            <button type="button" class="game-btn" id="game-start" data-i18n="game_start">START / RESTART</button>
+          <div class="stats">
+            <div class="stat"><span class="label" data-i18n="stat1Label">SUPPLY</span><div class="value">6969</div></div>
+            <div class="stat"><span class="label" data-i18n="stat2Label">FREEMINT</span><div class="value">100% FREE</div></div>
+            <div class="stat"><span class="label" data-i18n="stat3Label">ON BASE</span><div class="value">L2 NETWORK</div></div>
           </div>
+          <div class="benefits"><span class="pink">❤</span> <span data-i18n="benefits">BUILT ON BASE • SECURE • FAST • LOW FEES</span> <span>🦖</span></div>
         </div>
+        <div class="hero-art"><img src="assets/hero.jpg" alt="RAWR minting live artwork" /></div>
+      </div>
+    </section>
 
-        <div class="step"><span class="num">04</span><span data-i18n="step_wallet">Reach 20, then enter your wallet and submit once.</span></div>
-
-        <div class="gate-status" id="gate-status" data-i18n="gate_locked">🔒 CLAIM LOCKED — SCORE 20 TO UNLOCK WALLET ENTRY.</div>
-
-        <form id="claim-form" class="claim-locked" novalidate>
-          <label for="wallet" data-i18n="wallet_label">Wallet address</label>
-          <input id="wallet" name="wallet" type="text" inputmode="text" autocomplete="off" placeholder="LOCKED — SCORE 20 FIRST" maxlength="42" disabled />
-
-          <label for="handle" data-i18n="handle_label">X handle (optional)</label>
-          <input id="handle" name="twitter_handle" type="text" autocomplete="off" placeholder="@yourhandle" maxlength="64" disabled />
-
-          <label class="check" for="follow-confirm">
-            <input id="follow-confirm" type="checkbox" disabled />
-            <span data-i18n="follow_confirm">I've followed @rawrNft_base.</span>
-          </label>
-
-          <label class="check" for="retweet-confirm">
-            <input id="retweet-confirm" type="checkbox" disabled />
-            <span data-i18n="retweet_confirm">I've retweeted the official RAWR NFT post. Retweet is required before whitelist preclaim.</span>
-          </label>
-
-          <div class="honeypot" aria-hidden="true"><label>Website<input id="botcheck" name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
-
-          <button class="submit" id="submit-btn" type="submit" data-i18n="submit" disabled>PRECLAIM WHITELIST</button>
-          <div class="status" id="status" role="status" aria-live="polite"></div>
-          <p class="fine" data-i18n="fine">Never share your seed phrase or private key. This form only asks for a public wallet address.</p>
-        </form>
-      </section>
+    <div class="ticker">
+      <div class="ticker-inner">
+        <div class="badge-news" data-i18n="latestNews">LATEST NEWS</div>
+        <div class="ticker-track">
+          <span data-i18n="ticker1">RAWR NFT is now live on Base.</span>
+          <span data-i18n="ticker2">Freemint is live on OpenSea.</span>
+          <span data-i18n="ticker3">6969 supply. Stay RAWR.</span>
+          <span data-i18n="ticker1">RAWR NFT is now live on Base.</span>
+          <span data-i18n="ticker2">Freemint is live on OpenSea.</span>
+          <span data-i18n="ticker3">6969 supply. Stay RAWR.</span>
+        </div>
+        <div class="ticker-icons"><span>🎮</span><span>✕</span><span>◎</span><span>▮▮▮</span></div>
+      </div>
     </div>
   </main>
 
-  <footer>
-    <div class="wrap footer-row">
-      <span>© 2026 RAWR NFT</span>
-      <span><a href="https://opensea.io/collection/rawr-on-base/overview" target="_blank" rel="noopener">Mint on OpenSea ↗</a> &nbsp;·&nbsp; <a href="https://x.com/rawrNft_base" target="_blank" rel="noopener">x.com/rawrNft_base ↗</a></span>
+  <section id="about" class="section">
+    <div class="wrap info-grid">
+      <div class="panel">
+        <h2 class="section-title"><span class="accent" data-i18n="aboutTitleA">A meme</span> <span data-i18n="aboutTitleB">with mint energy.</span></h2>
+        <p class="section-text" data-i18n="aboutText">RAWR NFT is a 6969-supply collection on Base inspired by the energy of the Chrome Dino era and internet culture. The vibe is simple: freemint is freemint, the art is fun, and the community stays RAWR.</p>
+        <div class="card-grid">
+          <div class="mini-card"><h3 data-i18n="mini1Title">Freemint</h3><p data-i18n="mini1Text">No paid mint price. Only gas may apply depending on network conditions.</p></div>
+          <div class="mini-card"><h3 data-i18n="mini2Title">On Base</h3><p data-i18n="mini2Text">Built on Base for fast transactions and low fees.</p></div>
+          <div class="mini-card"><h3 data-i18n="mini3Title">Simple</h3><p data-i18n="mini3Text">Direct mint link, clean collection page, and easy access for everyone.</p></div>
+          <div class="mini-card"><h3 data-i18n="mini4Title">Community</h3><p data-i18n="mini4Text">A fun mint made to be shared, collected, and hyped together.</p></div>
+        </div>
+      </div>
+      <div class="panel" id="collection">
+        <h2 class="section-title" data-i18n="collectionTitle">Collection Snapshot</h2>
+        <div class="card-grid" style="margin-top:0">
+          <div class="mini-card"><h3>6969</h3><p data-i18n="cs1">Total NFT supply.</p></div>
+          <div class="mini-card"><h3>100% FREE</h3><p data-i18n="cs2">Public mint stays free.</p></div>
+          <div class="mini-card"><h3>BASE</h3><p data-i18n="cs3">Network for the collection.</p></div>
+          <div class="mini-card"><h3>OpenSea</h3><p data-i18n="cs4">Official mint and collection page.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mint" class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="panel" style="text-align:center;padding:34px">
+        <div class="small-pill" style="display:inline-flex;margin-bottom:14px" data-i18n="mintLive">MINT IS LIVE</div>
+        <h2 class="section-title" style="font-size:2.6rem;margin-bottom:8px" data-i18n="mintTitle">FREEMINT IS FREEMINT.</h2>
+        <p class="section-text" style="margin:0 auto 20px" data-i18n="mintText">Use the official OpenSea link below to mint and view the live collection.</p>
+        <div class="cta-row" style="justify-content:center">
+          <a class="btn primary" href="https://opensea.io/collection/rawr-on-base/overview" target="_blank" rel="noopener" data-i18n="btnMint">MINT ON OPENSEA</a>
+          <a class="btn secondary" href="https://x.com/rawrNft_base" target="_blank" rel="noopener">FOLLOW X</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section" style="padding-top:0">
+    <div class="wrap panel">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq">
+        <details open><summary data-i18n="q1">Is RAWR really free mint?</summary><p data-i18n="a1">Yes. RAWR is a freemint collection. Gas fees may still apply depending on the network.</p></details>
+        <details><summary data-i18n="q2">Where do I mint?</summary><p data-i18n="a2">Mint directly through the official OpenSea collection page linked on this website.</p></details>
+        <details><summary data-i18n="q3">What network is RAWR on?</summary><p data-i18n="a3">RAWR NFT is on Base.</p></details>
+        <details><summary data-i18n="q4">What is the total supply?</summary><p data-i18n="a4">The total supply is 6969 NFTs.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap foot">
+      <div>© 2026 RAWR NFT — ON BASE. STAY RAWR.</div>
+      <div class="socials"><a href="https://x.com/rawrNft_base" target="_blank" rel="noopener">X / Twitter</a><a href="https://opensea.io/collection/rawr-on-base/overview" target="_blank" rel="noopener">OpenSea</a></div>
     </div>
   </footer>
 
   <script>
-    const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwZxRs-sWGMvYaCMWajlosIoLwdaJB91RQPfMoUpQaLbJ7nbBTk6V57QlBMFICD4_Af/exec";
-
-    const I18N = {
-      en: {
-        eyebrow: "PRECLAIM · WHITELIST OPEN",
-        base_nav: "BASE NETWORK",
-        mint_nav: "MINT ON OPENSEA ↗", mint_hero: "MINT RAWR NFT ON OPENSEA ↗",
-        hero: "A tiny pixel beast is waking up on Base. 6,969 total supply. Free mint. Get your wallet on the RAWR NFT whitelist before the next phase begins.",
-        fact_supply: "TOTAL NFT SUPPLY", fact_free_value: "FREE", fact_mint: "MINT PRICE",
-        badge_free: "FREE MINT", badge_wallet: "NO WALLET CONNECT", badge_one: "ONE ENTRY / WALLET", badge_base: "BUILT ON BASE",
-        speech: "DON'T OVERTHINK IT. JUST RAWR.",
-        network_note: "RAWR NFT lives on Base — an Ethereum Layer 2 network. Total supply: 6,969 NFTs. Mint price: free.",
-        card_title: "Join the whitelist.",
-        card_sub: "Follow RAWR NFT on X, retweet the official post, then survive RAWR RUN and score 20 points to unlock wallet entry.",
-        step_follow: "Follow", step_retweet: "Retweet the official whitelist post.", retweet_btn: "OPEN POST & RETWEET ↗", step_game: "Score 20 points in RAWR RUN to unlock the claim terminal.", step_wallet: "Reach 20, then enter your wallet and submit once.", step_submit: "Confirm your retweet and submit once.",
-        game_title: "RAWR RUN · WHITELIST GATE", game_ready: "PRESS START · REACH 20 POINTS", game_help: "SPACE / ↑ / TAP = JUMP · PASS AN OBSTACLE = +1", game_start: "START / RESTART",
-        gate_locked: "🔒 CLAIM LOCKED — SCORE 20 TO UNLOCK WALLET ENTRY.", gate_unlocked: "✅ 20/20! CLAIM UNLOCKED — YOU CAN ENTER YOUR WALLET NOW.", game_over: "BONK! SCORE RESET — TRY AGAIN", game_win: "RAWR! 20/20 — WHITELIST TERMINAL UNLOCKED",
-        wallet_label: "Wallet address", handle_label: "X handle (optional)",
-        follow_confirm: "I've followed @rawrNft_base.",
-        retweet_confirm: "I've retweeted the official RAWR NFT post. Retweet is required before whitelist preclaim.",
-        submit: "PRECLAIM WHITELIST", submitting: "SUBMITTING...",
-        fine: "Never share your seed phrase or private key. This form only asks for a public wallet address.",
-        err_game: "Score 20 points in RAWR RUN before claiming.",
-        err_wallet: "Enter a valid EVM wallet address (0x + 40 hex characters).",
-        err_follow: "Please follow @rawrNft_base and confirm the checkbox first.",
-        err_retweet: "Retweet is required. Open the official post, retweet it, then confirm the checkbox.",
-        err_network: "Could not submit right now. Please try again.",
-        ok: "RAWR! Your whitelist preclaim has been submitted. 🦖"
-      },
-      zh: {
-        eyebrow: "预登记 · 白名单开放",
-        base_nav: "BASE 网络",
-        mint_nav: "前往 OPENSEA 铸造 ↗", mint_hero: "在 OPENSEA 铸造 RAWR NFT ↗",
-        hero: "这只像素小兽正在 Base 上苏醒。总供应量 6,969 枚，免费铸造。下一阶段开始前，把你的钱包加入 RAWR NFT 白名单。",
-        fact_supply: "NFT 总供应量", fact_free_value: "免费", fact_mint: "铸造价格",
-        badge_free: "免费铸造", badge_wallet: "无需连接钱包", badge_one: "每个钱包一次", badge_base: "构建于 BASE",
-        speech: "别想太多。RAWR 就对了。",
-        network_note: "RAWR NFT 位于 Base 网络 — 以太坊 Layer 2 网络。总供应量：6,969 枚 NFT。铸造价格：免费。",
-        card_title: "加入白名单。",
-        card_sub: "在 X 上关注 RAWR NFT，转发官方帖子，然后在 RAWR RUN 中获得 20 分，才能解锁钱包地址输入。",
-        step_follow: "关注", step_retweet: "转发官方白名单帖子。", retweet_btn: "打开帖子并转发 ↗", step_game: "在 RAWR RUN 中获得 20 分以解锁白名单终端。", step_wallet: "达到 20 分后，填写钱包地址并提交一次。", step_submit: "确认已转发，然后提交一次即可。",
-        game_title: "RAWR RUN · 白名单关卡", game_ready: "点击开始 · 达到 20 分", game_help: "空格 / ↑ / 点击 = 跳跃 · 越过障碍 +1", game_start: "开始 / 重新开始",
-        gate_locked: "🔒 白名单已锁定 — 达到 20 分后才能输入钱包地址。", gate_unlocked: "✅ 20/20！白名单已解锁 — 现在可以填写钱包地址。", game_over: "撞到了！分数归零 — 再试一次", game_win: "RAWR！20/20 — 白名单终端已解锁",
-        wallet_label: "钱包地址", handle_label: "X 用户名（可选）",
-        follow_confirm: "我已关注 @rawrNft_base。",
-        retweet_confirm: "我已转发 RAWR NFT 官方帖子。完成白名单预登记前必须转发。",
-        submit: "预登记白名单", submitting: "提交中...",
-        fine: "绝不要分享助记词或私钥。本表单只需要你的公开钱包地址。",
-        err_game: "请先在 RAWR RUN 中获得 20 分。",
-        err_wallet: "请输入有效的 EVM 钱包地址（0x + 40 位十六进制字符）。",
-        err_follow: "请先关注 @rawrNft_base 并勾选确认。",
-        err_retweet: "必须先转发。请打开官方帖子完成转发，然后勾选确认。",
-        err_network: "暂时无法提交，请稍后重试。",
-        ok: "RAWR！你的白名单预登记已提交。🦖"
-      }
+    const copy={
+      en:{navHome:'HOME',navAbout:'ABOUT',navCollection:'COLLECTION',navMint:'MINT',navFaq:'FAQ',eyebrow:'RAWR NFT',onBase:'ON BASE',today:'TODAY',on:'on',supplyText:'6969 UNIQUE RAWR NFTs.',freeText:'FREEMINT.',stayText:'STAY RAWR.',btnMint:'MINT ON OPENSEA',btnCollection:'VIEW COLLECTION',stat1Label:'SUPPLY',stat2Label:'FREEMINT',stat3Label:'ON BASE',benefits:'BUILT ON BASE • SECURE • FAST • LOW FEES',latestNews:'LATEST NEWS',ticker1:'RAWR NFT is now live on Base.',ticker2:'Freemint is live on OpenSea.',ticker3:'6969 supply. Stay RAWR.',aboutTitleA:'A meme',aboutTitleB:'with mint energy.',aboutText:'RAWR NFT is a 6969-supply collection on Base inspired by the energy of the Chrome Dino era and internet culture. The vibe is simple: freemint is freemint, the art is fun, and the community stays RAWR.',mini1Title:'Freemint',mini1Text:'No paid mint price. Only gas may apply depending on network conditions.',mini2Title:'On Base',mini2Text:'Built on Base for fast transactions and low fees.',mini3Title:'Simple',mini3Text:'Direct mint link, clean collection page, and easy access for everyone.',mini4Title:'Community',mini4Text:'A fun mint made to be shared, collected, and hyped together.',collectionTitle:'Collection Snapshot',cs1:'Total NFT supply.',cs2:'Public mint stays free.',cs3:'Network for the collection.',cs4:'Official mint and collection page.',mintLive:'MINT IS LIVE',mintTitle:'FREEMINT IS FREEMINT.',mintText:'Use the official OpenSea link below to mint and view the live collection.',q1:'Is RAWR really free mint?',a1:'Yes. RAWR is a freemint collection. Gas fees may still apply depending on the network.',q2:'Where do I mint?',a2:'Mint directly through the official OpenSea collection page linked on this website.',q3:'What network is RAWR on?',a3:'RAWR NFT is on Base.',q4:'What is the total supply?',a4:'The total supply is 6969 NFTs.'},
+      zh:{navHome:'首页',navAbout:'关于',navCollection:'系列',navMint:'铸造',navFaq:'常见问题',eyebrow:'RAWR NFT',onBase:'BASE 链上',today:'今天',on:'on',supplyText:'6969 个独特 RAWR NFT。',freeText:'免费铸造。',stayText:'保持 RAWR。',btnMint:'在 OPENSEA 铸造',btnCollection:'查看系列',stat1Label:'总量',stat2Label:'免费铸造',stat3Label:'BASE 链上',benefits:'构建于 BASE • 安全 • 快速 • 低手续费',latestNews:'最新消息',ticker1:'RAWR NFT 已在 Base 上线。',ticker2:'OpenSea 免费铸造现已开始。',ticker3:'总量 6969。保持 RAWR。',aboutTitleA:'一个 meme',aboutTitleB:'加上强烈铸造氛围。',aboutText:'RAWR NFT 是一个总量 6969 的 Base NFT 系列，灵感来自 Chrome Dino 时代与互联网文化。核心很简单：免费铸造就是免费铸造，艺术有趣，社区保持 RAWR。',mini1Title:'免费铸造',mini1Text:'没有付费铸造价格。根据网络状况，可能仍需支付 gas。',mini2Title:'基于 Base',mini2Text:'构建于 Base，交易更快，费用更低。',mini3Title:'简单直接',mini3Text:'直接铸造链接，清晰的系列页面，任何人都能轻松参与。',mini4Title:'社区氛围',mini4Text:'一个适合分享、收藏、一起造势的有趣铸造项目。',collectionTitle:'系列概览',cs1:'NFT 总供应量。',cs2:'公开铸造保持免费。',cs3:'系列所属网络。',cs4:'官方铸造与系列页面。',mintLive:'铸造已开启',mintTitle:'免费铸造就是免费铸造。',mintText:'使用下方官方 OpenSea 链接进行铸造并查看实时系列页面。',q1:'RAWR 真的是免费铸造吗？',a1:'是的。RAWR 是免费铸造项目，但根据网络情况仍可能产生 gas 费用。',q2:'在哪里铸造？',a2:'请通过本网站提供的官方 OpenSea 系列页面进行铸造。',q3:'RAWR 在哪个网络？',a3:'RAWR NFT 部署在 Base。',q4:'总供应量是多少？',a4:'总供应量为 6969 个 NFT。'}
     };
-
-    let currentLang = "en";
-    const t = (k) => I18N[currentLang][k] || k;
-
-    function applyLang(lang){
-      currentLang = lang;
-      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (I18N[lang][key] !== undefined) el.textContent = I18N[lang][key];
-      });
-      document.getElementById("lang-en").classList.toggle("active", lang === "en");
-      document.getElementById("lang-zh").classList.toggle("active", lang === "zh");
-      document.getElementById("status").textContent = "";
-      document.getElementById("status").className = "status";
-      updateGameUi();
+    function setLang(lang){
+      document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+      document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n; if(copy[lang][key]) el.textContent=copy[lang][key];});
+      document.getElementById('enBtn').classList.toggle('active',lang==='en');
+      document.getElementById('zhBtn').classList.toggle('active',lang==='zh');
+      localStorage.setItem('rawr_lang',lang);
     }
-
-    document.getElementById("lang-en").addEventListener("click", () => applyLang("en"));
-    document.getElementById("lang-zh").addEventListener("click", () => applyLang("zh"));
-
-    function validAddress(v){ return /^0x[a-fA-F0-9]{40}$/.test(v.trim()); }
-
-    /* ---------- RAWR RUN ----------
-       Original lightweight endless-runner built for the RAWR whitelist gate.
-       No Chrome game sprites/assets are used.
-    */
-    const GAME_TARGET = 20;
-    const canvas = document.getElementById("rawr-game");
-    const ctx = canvas.getContext("2d");
-    const scoreEl = document.getElementById("game-score");
-    const overlay = document.getElementById("game-overlay");
-    const overlayText = document.getElementById("game-overlay-text");
-    const startBtn = document.getElementById("game-start");
-    const gateStatus = document.getElementById("gate-status");
-
-    let gameUnlocked = sessionStorage.getItem("rawr_game_20_unlocked") === "1";
-    let running = false;
-    let won = gameUnlocked;
-    let score = gameUnlocked ? GAME_TARGET : 0;
-    let lastTime = 0;
-    let spawnTimer = 0;
-    let nextSpawn = 1050;
-    let speed = 270;
-    let obstacles = [];
-    let dust = [];
-
-    const groundY = 158;
-    const dino = {x:72, y:groundY-40, w:42, h:40, vy:0, grounded:true};
-
-    function rand(a,b){ return a + Math.random()*(b-a); }
-
-    function resetDino(){
-      dino.y = groundY-dino.h;
-      dino.vy = 0;
-      dino.grounded = true;
-    }
-
-    function setClaimUnlocked(unlocked){
-      gameUnlocked = unlocked;
-      const form = document.getElementById("claim-form");
-      const ids = ["wallet","handle","follow-confirm","retweet-confirm","submit-btn"];
-      ids.forEach(id => document.getElementById(id).disabled = !unlocked);
-      form.classList.toggle("claim-locked", !unlocked);
-      document.getElementById("wallet").placeholder = unlocked ? "0x..." : "LOCKED — SCORE 20 FIRST";
-      gateStatus.classList.toggle("unlocked", unlocked);
-      if(unlocked){
-        sessionStorage.setItem("rawr_game_20_unlocked","1");
-      } else {
-        sessionStorage.removeItem("rawr_game_20_unlocked");
-      }
-      updateGameUi();
-    }
-
-    function updateGameUi(){
-      if(!scoreEl) return;
-      scoreEl.textContent = `SCORE ${Math.min(score,GAME_TARGET)} / ${GAME_TARGET}`;
-      gateStatus.textContent = gameUnlocked ? t("gate_unlocked") : t("gate_locked");
-      if(gameUnlocked) gateStatus.classList.add("unlocked");
-      else gateStatus.classList.remove("unlocked");
-
-      if(!running){
-        if(won || gameUnlocked) overlayText.textContent = t("game_win");
-        else if(score === 0) overlayText.textContent = t("game_ready");
-      }
-    }
-
-    function startGame(){
-      if(gameUnlocked){
-        overlay.style.display = "flex";
-        overlayText.textContent = t("game_win");
-        drawGame();
-        return;
-      }
-      score = 0;
-      won = false;
-      speed = 270;
-      spawnTimer = 0;
-      nextSpawn = 850;
-      obstacles = [];
-      dust = [];
-      resetDino();
-      running = true;
-      lastTime = performance.now();
-      overlay.style.display = "none";
-      updateGameUi();
-      requestAnimationFrame(loop);
-    }
-
-    function jump(){
-      if(!running){
-        if(!gameUnlocked) startGame();
-        return;
-      }
-      if(dino.grounded){
-        dino.vy = -535;
-        dino.grounded = false;
-      }
-    }
-
-    function spawnObstacle(){
-      const tall = Math.random() > .55;
-      obstacles.push({
-        x: canvas.width + 20,
-        y: tall ? groundY-42 : groundY-28,
-        w: tall ? 23 : 28,
-        h: tall ? 42 : 28,
-        passed:false,
-        type: Math.random() > .5 ? 1 : 0
-      });
-    }
-
-    function collision(a,b){
-      const padX = 7, padY = 5;
-      return a.x+padX < b.x+b.w &&
-             a.x+a.w-padX > b.x &&
-             a.y+padY < b.y+b.h &&
-             a.y+a.h-padY > b.y;
-    }
-
-    function gameOver(){
-      running = false;
-      score = 0;
-      speed = 270;
-      obstacles = [];
-      resetDino();
-      overlay.style.display = "flex";
-      overlayText.textContent = t("game_over");
-      updateGameUi();
-      drawGame();
-    }
-
-    function winGame(){
-      running = false;
-      won = true;
-      score = GAME_TARGET;
-      obstacles = [];
-      resetDino();
-      setClaimUnlocked(true);
-      overlay.style.display = "flex";
-      overlayText.textContent = t("game_win");
-      drawGame();
-    }
-
-    function pxRect(x,y,w,h,color){
-      ctx.fillStyle=color; ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));
-    }
-
-    function drawDino(){
-      const x=Math.round(dino.x), y=Math.round(dino.y);
-      // RAWR original green pixel beast
-      pxRect(x+8,y+4,26,24,"#5f8f45");
-      pxRect(x+23,y+8,17,17,"#6fa34f");
-      pxRect(x+29,y+11,5,5,"#111");
-      pxRect(x+30,y+11,2,2,"#fff");
-      pxRect(x+34,y+21,8,5,"#f5f2df");
-      pxRect(x+2,y+12,12,11,"#5f8f45");
-      pxRect(x+5,y+23,18,9,"#5f8f45");
-      pxRect(x+9,y+31,6,9,"#3d672e");
-      pxRect(x+22,y+31,6,9,"#3d672e");
-      pxRect(x+1,y+10,6,5,"#3d672e");
-      // hoodie-ish dark patch
-      pxRect(x+11,y+21,13,8,"#252525");
-      // teeth
-      pxRect(x+35,y+21,2,3,"#fff");
-      pxRect(x+39,y+21,2,3,"#fff");
-    }
-
-    function drawObstacle(o){
-      if(o.type===0){
-        pxRect(o.x,o.y,o.w,o.h,"#1d1d1d");
-        pxRect(o.x+5,o.y-7,7,9,"#1d1d1d");
-        pxRect(o.x+13,o.y+8,8,7,"#1d1d1d");
-      }else{
-        pxRect(o.x,o.y,o.w,o.h,"#5f8f45");
-        pxRect(o.x+6,o.y-7,7,12,"#5f8f45");
-        pxRect(o.x-5,o.y+12,8,7,"#5f8f45");
-        pxRect(o.x+o.w-2,o.y+18,8,7,"#5f8f45");
-      }
-    }
-
-    function drawGame(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.imageSmoothingEnabled=false;
-
-      // Paper sky
-      pxRect(0,0,canvas.width,canvas.height,"#f8f8f4");
-
-      // Base blue pixel skyline
-      for(let i=0;i<12;i++){
-        const x=i*58 + 18;
-        const h=18 + (i%4)*8;
-        pxRect(x,groundY-h-14,34,h,"#dbe5ff");
-      }
-
-      // Clouds
-      pxRect(420,35,50,7,"#dfddd5");
-      pxRect(438,29,24,7,"#dfddd5");
-      pxRect(145,48,38,6,"#e5e2db");
-
-      // Ground + road ticks
-      pxRect(0,groundY,canvas.width,3,"#161616");
-      for(let x=0;x<canvas.width;x+=34) pxRect(x,groundY+13,18,3,"#c4c0b7");
-
-      // Base blue line
-      pxRect(0,groundY+34,canvas.width,5,"#0052ff");
-
-      obstacles.forEach(drawObstacle);
-      drawDino();
-
-      // tiny dust
-      dust.forEach(p=>pxRect(p.x,p.y,3,3,"#a8a49a"));
-
-      // corner tag
-      ctx.fillStyle="#161616";
-      ctx.font="bold 12px monospace";
-      ctx.fillText("RAWR RUN // BASE", 12, 20);
-    }
-
-    function update(dt){
-      dino.vy += 1450*dt;
-      dino.y += dino.vy*dt;
-      if(dino.y >= groundY-dino.h){
-        dino.y = groundY-dino.h;
-        dino.vy=0;
-        dino.grounded=true;
-      }
-
-      spawnTimer += dt*1000;
-      if(spawnTimer >= nextSpawn){
-        spawnTimer=0;
-        nextSpawn=rand(850,1400);
-        spawnObstacle();
-      }
-
-      for(const o of obstacles){
-        o.x -= speed*dt;
-        if(!o.passed && o.x+o.w < dino.x){
-          o.passed=true;
-          score++;
-          speed = Math.min(410, speed+4.5);
-          updateGameUi();
-          if(score >= GAME_TARGET){ winGame(); return; }
-        }
-        if(collision(dino,o)){ gameOver(); return; }
-      }
-      obstacles = obstacles.filter(o=>o.x+o.w>-20);
-
-      if(dino.grounded && Math.random()<.13){
-        dust.push({x:dino.x+4,y:groundY-3,life:.3});
-      }
-      dust.forEach(p=>{p.x-=80*dt;p.life-=dt});
-      dust=dust.filter(p=>p.life>0);
-    }
-
-    function loop(now){
-      if(!running) return;
-      const dt=Math.min(.032,(now-lastTime)/1000);
-      lastTime=now;
-      update(dt);
-      drawGame();
-      if(running) requestAnimationFrame(loop);
-    }
-
-    startBtn.addEventListener("click", startGame);
-    canvas.addEventListener("pointerdown", (e)=>{e.preventDefault();jump();});
-    window.addEventListener("keydown", (e)=>{
-      if(e.code==="Space" || e.code==="ArrowUp"){
-        const active=document.activeElement;
-        if(active && (active.tagName==="INPUT" || active.tagName==="TEXTAREA")) return;
-        e.preventDefault(); jump();
-      }
-    });
-
-    setClaimUnlocked(gameUnlocked);
-    drawGame();
-
-    const form = document.getElementById("claim-form");
-    const btn = document.getElementById("submit-btn");
-    const status = document.getElementById("status");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      status.textContent = "";
-      status.className = "status";
-
-      const wallet = document.getElementById("wallet").value.trim();
-      const handle = document.getElementById("handle").value.trim();
-      const followed = document.getElementById("follow-confirm").checked;
-      const retweeted = document.getElementById("retweet-confirm").checked;
-      const bot = document.getElementById("botcheck").value.trim();
-
-      if (bot) return;
-      if (!gameUnlocked) {
-        status.textContent = t("err_game"); status.className = "status err"; return;
-      }
-      if (!validAddress(wallet)) {
-        status.textContent = t("err_wallet"); status.className = "status err"; return;
-      }
-      if (!followed) {
-        status.textContent = t("err_follow"); status.className = "status err"; return;
-      }
-      if (!retweeted) {
-        status.textContent = t("err_retweet"); status.className = "status err"; return;
-      }
-
-      btn.disabled = true;
-      btn.textContent = t("submitting");
-
-      const body = new URLSearchParams();
-      body.append("wallet_address", wallet);
-      body.append("twitter_handle", handle);
-      // Keep the existing field name for compatibility with the previous Google Sheet script.
-      body.append("retweet_confirmed", "yes");
-      body.append("game_score", String(GAME_TARGET));
-      body.append("game_completed", "yes");
-      body.append("source", "rawr-preclaim-game");
-
-      try {
-        await fetch(SHEET_ENDPOINT, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-          body
-        });
-        status.textContent = t("ok");
-        status.className = "status ok";
-        localStorage.setItem("rawr_preclaim_wallet", wallet.toLowerCase());
-        form.reset();
-      } catch (err) {
-        status.textContent = t("err_network");
-        status.className = "status err";
-      } finally {
-        btn.disabled = false;
-        btn.textContent = t("submit");
-      }
-    });
+    document.getElementById('enBtn').onclick=()=>setLang('en');
+    document.getElementById('zhBtn').onclick=()=>setLang('zh');
+    setLang(localStorage.getItem('rawr_lang')||'en');
   </script>
 </body>
 </html>
